@@ -100,8 +100,8 @@ const AdminRoute = ({ children }) => {
   }
 
   // Allow access for admin, sales, and accounts roles
-  const allowedRoles = ['admin', 'sales', 'accounts'];
-  
+  const allowedRoles = ["admin", "sales", "accounts"];
+
   if (!allowedRoles.includes(user?.role)) {
     return <Navigate to="/" replace />;
   }
@@ -219,7 +219,12 @@ const App = () => {
           {/* Public Routes - Accessible to everyone */}
           <Route index path="/" element={<LandingPage />} />
           <Route path="/products/:category" element={<ProductPage2 />} />
-          <Route path="/products-details/:id" element={<ProductDetailsPage />} />
+          <Route
+            path="/products-details/:id"
+            element={<ProductDetailsPage />}
+          />
+          <Route path="/checkout/:id" element={<CheckoutPage />} />
+
           {/* <Route path="/products/:category" element={<ProductPage />} /> */}
           <Route
             path="/products/:category/:subcategory"
@@ -230,9 +235,9 @@ const App = () => {
             element={<ProductDetails />}
           />
           <Route path="/product-details/:PSlug" element={<ProductDetails />} />
-          <Route path="/about" element={<AboutPage/>}/>
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/cms/:slug" element={<CMSTemplate/>}/>
+          <Route path="/cms/:slug" element={<CMSTemplate />} />
           <Route path="blogs" element={<BlogPage />} />
           <Route path="blogs/:slug" element={<BlogsDetails />} />
           <Route path="/cart" element={<CartPage />} />
@@ -263,14 +268,6 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/checkout/:id"
-            element={
-              <ProtectedRoute>
-                <CheckoutPage />
-              </ProtectedRoute>
-            }
-          />
         </Route>
 
         {/* Admin Routes - Accessible by admin, sales, accounts */}
@@ -286,15 +283,15 @@ const App = () => {
           <Route index element={<Dashboard />} />
           <Route path="products" element={<HandleProduct />} />
           <Route path="order-track" element={<HandleOrderTract />} />
-          <Route path="order-details/:id" element={<TrackOrderDetails/>}/> 
-          <Route path="profile" element={<AdminProfile />}  />
+          <Route path="order-details/:id" element={<TrackOrderDetails />} />
+          <Route path="profile" element={<AdminProfile />} />
           <Route path="mange-blogs" element={<HandleBlog />} />
 
           {/* Admin Only Routes */}
           <Route
             path="products-category"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleProductCategory />
               </RoleBasedRoute>
             }
@@ -302,7 +299,7 @@ const App = () => {
           <Route
             path="products-sub-category"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleProductSubCategory />
               </RoleBasedRoute>
             }
@@ -310,7 +307,7 @@ const App = () => {
           <Route
             path="site-settings"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <SiteSettings />
               </RoleBasedRoute>
             }
@@ -318,7 +315,7 @@ const App = () => {
           <Route
             path="seo-settings"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <SeoSettings />
               </RoleBasedRoute>
             }
@@ -326,7 +323,7 @@ const App = () => {
           <Route
             path="landing-page/hero-section"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleHeroSection />
               </RoleBasedRoute>
             }
@@ -334,7 +331,7 @@ const App = () => {
           <Route
             path="landing-page/how-it-works"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleHowItWorks />
               </RoleBasedRoute>
             }
@@ -342,7 +339,7 @@ const App = () => {
           <Route
             path="landing-page/why-chose-us"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleWhyChoseUs />
               </RoleBasedRoute>
             }
@@ -350,7 +347,7 @@ const App = () => {
           <Route
             path="landing-page/your-goals-section"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleYourGoalsSection />
               </RoleBasedRoute>
             }
@@ -358,7 +355,7 @@ const App = () => {
           <Route
             path="landing-page/your-goals"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleGoals />
               </RoleBasedRoute>
             }
@@ -366,7 +363,7 @@ const App = () => {
           <Route
             path="contact"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleContact />
               </RoleBasedRoute>
             }
@@ -374,7 +371,7 @@ const App = () => {
           <Route
             path="contact/faqs"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandleFAQs />
               </RoleBasedRoute>
             }
@@ -382,7 +379,7 @@ const App = () => {
           <Route
             path="payment-setup"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <HandlePaymentSetup />
               </RoleBasedRoute>
             }
@@ -390,22 +387,25 @@ const App = () => {
           <Route
             path="mange-account"
             element={
-              <RoleBasedRoute allowedRoles={['admin']}>
+              <RoleBasedRoute allowedRoles={["admin"]}>
                 <MangeAccount />
               </RoleBasedRoute>
             }
           />
-          <Route path="mange-delivery-partner" element={<DeliveryPartnerMaster />} />
+          <Route
+            path="mange-delivery-partner"
+            element={<DeliveryPartnerMaster />}
+          />
 
-          <Route path="mange-cms" element={<MangeCMSPage/>}/>
-          <Route path="mange-about" element={<MangeAbout/>}/>
-          <Route path="mange-fellows" element={<MangeFellows/>}/>
+          <Route path="mange-cms" element={<MangeCMSPage />} />
+          <Route path="mange-about" element={<MangeAbout />} />
+          <Route path="mange-fellows" element={<MangeFellows />} />
 
           {/* Sales Routes - */}
           <Route
             path="sales-leads"
             element={
-              <RoleBasedRoute allowedRoles={['sales', 'admin']}>
+              <RoleBasedRoute allowedRoles={["sales", "admin"]}>
                 <SalesLead />
               </RoleBasedRoute>
             }
@@ -415,12 +415,15 @@ const App = () => {
           <Route
             path="account-order-track"
             element={
-              <RoleBasedRoute allowedRoles={['accounts', 'admin']}>
+              <RoleBasedRoute allowedRoles={["accounts", "admin"]}>
                 <MangeOrders />
               </RoleBasedRoute>
             }
           />
-          <Route path="account-order-details/:id" element={<AccountsOrderDetails/>}/>
+          <Route
+            path="account-order-details/:id"
+            element={<AccountsOrderDetails />}
+          />
         </Route>
 
         {/* 404 Not Found Route */}

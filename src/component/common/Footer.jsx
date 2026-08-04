@@ -149,7 +149,7 @@ const Footer = ({ contactData }) => {
                 <div className="flex flex-col items-start gap-4 mb-4">
                   <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-[#FAFAFA] border border-[#E5E7EB] p-2">
                     <img
-                      src={`${STORAGE_URL}/${contactData?.site_web_logo}`}
+                      src="/image/logo.jpeg"
                       alt={contactData?.site_logo_alt || "ONE REP MORE Logo"}
                       className="w-full h-full object-contain"
                       onError={(e) => {
@@ -161,21 +161,12 @@ const Footer = ({ contactData }) => {
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold">
-                      <span className="text-[#182E72]">
-                        {contactData?.site_name?.split(" ")[0] || "ONE"}
-                      </span>
-                      <span className="text-[#182E72]">
-                        {" "}
-                        {contactData?.site_name
-                          ?.split(" ")
-                          .slice(1)
-                          .join(" ") || "REP MORE"}
-                      </span>
+                      APSARA
                     </h2>
-                    <p className="text-sm text-[#6B7280] italic tracking-wide">
+                    {/* <p className="text-sm text-[#6B7280] italic tracking-wide">
                       {contactData?.punch_line ||
                         "Your Ultimate Fitness Destination"}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </motion.div>

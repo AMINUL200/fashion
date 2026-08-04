@@ -236,8 +236,7 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-[#E5E7EB] bg-[#FAFAFA]">
           <h2 className="text-xl font-bold font-heading">
-            <span className="text-[#182E72]">ONE </span>
-            <span className="text-[#182E72]">REP MORE</span>
+            <span className="text-[#182E72]">APSARA </span>
           </h2>
           <button
             onClick={toggleMenu}

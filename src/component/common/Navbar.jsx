@@ -252,9 +252,9 @@ const Navbar = ({ toggleMenu, contactData }) => {
           <div className="relative">
             {contactData?.site_web_logo ? (
               <img
-                src={`${STORAGE_URL}/${contactData.site_web_logo}`}
+                src="/image/logo.jpeg"
                 alt={contactData?.site_name || "One Rep More"}
-                className={`h-24 w-auto object-contain rounded-full transition-all duration-300 ${
+                className={`h-24 w-auto object-contain rounded transition-all duration-300 ${
                   scrolled ? "bg-white" : "bg-white/90"
                 }`}
               />
