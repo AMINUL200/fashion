@@ -81,7 +81,7 @@ const PageLoader = () => {
               }}
             >
               <img
-                src="/image/gym_log2.png"
+                src="/image/logo.jpeg"
                 alt="One Rep More"
                 className="w-full h-full object-cover rounded-full"
               />
@@ -94,11 +94,9 @@ const PageLoader = () => {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-2 text-primary">
-            ONE <span className="text-brand">REP</span> MORE
+            APSARA 
           </h1>
-          <p className="text-sm uppercase tracking-widest text-muted">
-           JUST FLAUNT
-          </p>
+         
         </div>
 
         {/* Middle: Rotating Gym Instrument */}
