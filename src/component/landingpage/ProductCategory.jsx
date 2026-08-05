@@ -11,7 +11,7 @@ const CATEGORIES = [
     title: 'MEN',
     subtitle: 'Premium Collection',
     price: 'Starting from $39',
-    image: '/image/category/men.jpg',
+    image: '/image/hero/men.png',
     link: '/products/men',
     layout: 'large',
     height: 'h-[640px]',
@@ -22,7 +22,7 @@ const CATEGORIES = [
     title: 'WOMEN',
     subtitle: 'Elegant Styles',
     price: 'Starting from $45',
-    image: '/image/category/women.jpg',
+    image: '/image/hero/banner2.png',
     link: '/products/women',
     layout: 'medium',
     height: 'h-[310px]',
@@ -33,7 +33,7 @@ const CATEGORIES = [
     title: 'KIDS',
     subtitle: 'Playful Collection',
     price: 'Starting from $25',
-    image: '/image/category/kids.jpg',
+    image: '/image/hero/child.png',
     link: '/products/kids',
     layout: 'medium',
     height: 'h-[310px]',
@@ -107,18 +107,18 @@ const CategoryCard = React.memo(({ category }) => {
   return (
     <div
       className={`
-        relative ${category.height} rounded-2xl overflow-hidden 
+        relative ${category.height} rounded-[18px] overflow-hidden 
         group cursor-pointer 
-        border border-white/10 
-        shadow-[0_8px_30px_rgba(0,0,0,0.12)] 
+        border border-[#EFE7C8]
+        shadow-[0_8px_30px_rgba(0,0,0,0.06)] 
         transition-all duration-500 ease-out 
-        hover:shadow-[0_20px_60px_rgba(24,46,114,0.25)] 
+        hover:shadow-[0_20px_60px_rgba(209,151,1,0.15)] 
         hover:-translate-y-2 
+        hover:border-[#D19701]
         transform-gpu
         contain-layout
       `}
       onClick={() => {
-        // Use window.location for navigation without re-rendering
         window.location.href = category.link;
       }}
     >
@@ -141,10 +141,10 @@ const CategoryCard = React.memo(({ category }) => {
         />
       </div>
 
-      {/* ===== GRADIENT OVERLAY ===== */}
+      {/* ===== GRADIENT OVERLAY - Premium Gold Tones ===== */}
       <div className="
         absolute inset-0 
-        bg-gradient-to-t from-black/85 via-black/30 to-black/5 
+        bg-gradient-to-t from-[#000000]/85 via-[#000000]/30 to-[#000000]/5 
         transition-opacity duration-500 
         group-hover:opacity-100
         opacity-90
@@ -153,16 +153,25 @@ const CategoryCard = React.memo(({ category }) => {
       {/* ===== TOP SHEEN ===== */}
       <div className="
         absolute inset-0 
-        bg-gradient-to-b from-white/10 to-transparent 
+        bg-gradient-to-b from-[#FFF19C]/10 to-transparent 
         transition-opacity duration-500 
         opacity-0 group-hover:opacity-100
+      " />
+
+      {/* ===== GOLD ACCENT LINE ON HOVER ===== */}
+      <div className="
+        absolute top-0 left-0 
+        h-1 
+        bg-gradient-to-r from-[#B67E00] via-[#D19701] to-[#FFF19C]
+        transition-all duration-500 ease-out 
+        w-0 group-hover:w-full
       " />
 
       {/* ===== CONTENT ===== */}
       <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
         <span className="
           inline-block 
-          text-white/70 text-[10px] md:text-xs 
+          text-[#FFF19C] text-[10px] md:text-xs 
           uppercase tracking-[0.25em] font-medium 
           mb-2
         ">
@@ -179,24 +188,27 @@ const CategoryCard = React.memo(({ category }) => {
         </h3>
 
         <div className="flex items-center justify-between mt-4">
-          <p className="text-white/80 text-sm font-medium">
+          <p className="text-[#FFF19C] text-sm font-medium">
             {category.price}
           </p>
 
           <button
             className="
               flex items-center gap-2 
-              bg-white/10 backdrop-blur-md 
-              border border-white/30 
-              text-white text-sm px-4 py-2.5 
-              rounded-xl font-medium 
+              text-[#5A3A00] text-sm px-5 py-2.5 
+              rounded-[14px] font-medium 
               transition-all duration-300 ease-out 
-              hover:bg-white hover:text-[#182E72] 
-              hover:border-white hover:shadow-lg 
+              hover:shadow-lg 
               hover:scale-105 
               transform-gpu
               group-hover:translate-x-0
             "
+            style={{
+              background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+              border: '1px solid #C38A00',
+              boxShadow: '0 10px 25px rgba(209,151,1,0.25)',
+              fontFamily: "'Inter', sans-serif"
+            }}
           >
             Shop Now
             <ArrowRight
@@ -210,12 +222,12 @@ const CategoryCard = React.memo(({ category }) => {
         </div>
       </div>
 
-      {/* ===== CORNER ACCENT ===== */}
+      {/* ===== CORNER ACCENT - Gold ===== */}
       <div className="
         absolute top-6 left-6 h-[2px] 
-        bg-white/50 
+        bg-[#FFF19C]/50 
         transition-all duration-500 ease-out 
-        group-hover:w-14 group-hover:bg-white
+        group-hover:w-14 group-hover:bg-[#D19701]
         w-8
       " />
     </div>
@@ -234,17 +246,20 @@ const ProductCategory = () => {
   const smallCategories = CATEGORIES.filter(c => c.layout === 'small');
 
   return (
-    <section className="bg-[#F8FAFC] py-16">
+    <section className="bg-[#FFFFFF] py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header - Premium Gold Styling */}
         <div className="text-center mb-12">
-          <span className="text-[#6B7280] text-xs uppercase tracking-[0.2em] font-medium">
+          <span className="text-[#D19701] text-xs uppercase tracking-[0.25em] font-semibold">
             Shop by Category
           </span>
-          <h2 className="font-heading text-3xl md:text-4xl text-[#111827] mt-2">
+          <h2 className="font-heading text-3xl md:text-4xl text-[#111111] mt-2">
             Explore Our Collections
           </h2>
-          <p className="text-[#6B7280] text-sm mt-3 max-w-lg mx-auto">
+          <div className="flex justify-center mt-3">
+            <div className="h-[2px] w-16 bg-gradient-to-r from-[#B67E00] via-[#D19701] to-[#FFF19C] rounded-full" />
+          </div>
+          <p className="text-[#666666] text-sm mt-4 max-w-lg mx-auto">
             Discover our premium collections crafted for every season.
           </p>
         </div>

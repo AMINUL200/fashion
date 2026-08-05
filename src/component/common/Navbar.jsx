@@ -232,68 +232,44 @@ const Navbar = ({ toggleMenu, contactData }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300 font-heading">
+    <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300" style={{ fontFamily: "'Poppins', sans-serif" }}>
       {/* ================= MAIN NAVBAR ================= */}
       <div
-        className={`flex justify-between items-center px-6 md:px-10 transition-all duration-300 ${
-          scrolled 
-            ? "bg-white shadow-md py-1" 
-            : "bg-transparent py-3"
-        }`}
+        className="flex justify-between items-center transition-all duration-300"
         style={{
-          borderBottom: scrolled ? "1px solid #E5E7EB" : "1px solid transparent",
+          background: 'black',
+          height: '88px',
+          padding: '0 60px',
+          // borderBottom: '1px solid #EFE7C8',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.05)',
         }}
       >
         {/* LEFT: LOGO */}
         <div
-          className="flex items-center gap-3 cursor-pointer"
+          className="flex items-center gap-4 cursor-pointer"
           onClick={() => navigate("/")}
         >
           <div className="relative">
             {contactData?.site_web_logo ? (
               <img
-                src="/image/logo.jpeg"
+                src="/image/logo2.jpeg"
                 alt={contactData?.site_name || "One Rep More"}
-                className={`h-24 w-auto object-contain rounded transition-all duration-300 ${
-                  scrolled ? "bg-white" : "bg-white/90"
-                }`}
+                className="h-20 w-auto object-contain rounded transition-all duration-300"
               />
             ) : (
               <img
                 src="/image/gym_logo.png"
                 alt="One Rep More"
-                className={`h-14 w-14 object-contain rounded-full p-1 transition-all duration-300 ${
-                  scrolled ? "bg-white" : "bg-white/90"
-                }`}
+                className="h-14 w-14 object-contain rounded-full p-1 transition-all duration-300"
               />
             )}
           </div>
-
-          
         </div>
 
         {/* CENTER: NAV LINKS */}
         <nav className="hidden md:flex flex-col items-center gap-2">
-          {/* TOP: CONTACT INFO */}
-          {/* <div className="flex items-center gap-6 text-xs">
-            {contactLinks.map((link) => (
-              <a
-                key={link.id}
-                href={link.path}
-                className={`flex items-center gap-2 transition-colors duration-300 ${
-                  scrolled 
-                    ? "text-[#6B7280] hover:text-[#182E72]" 
-                    : "text-white/80 hover:text-white"
-                }`}
-              >
-                <link.icon size={12} className={scrolled ? "text-[#182E72]" : "text-white"} />
-                <span>{link.label}</span>
-              </a>
-            ))}
-          </div> */}
-
-          {/* BOTTOM: NAV LINKS - Reduced font size */}
-          <div className="flex items-center gap-6">
+          {/* BOTTOM: NAV LINKS */}
+          <div className="flex items-center gap-8">
             {navLinks.map((item) => {
               const active =
                 location.pathname === item.path ||
@@ -310,27 +286,33 @@ const Navbar = ({ toggleMenu, contactData }) => {
                   >
                     <button
                       onClick={handleShopClick}
-                      className={`nav-link flex items-center gap-1 text-base md:text-lg font-semibold tracking-wide transition-all duration-300 px-2 py-1 ${
+                      className={`nav-link flex items-center gap-1 transition-all duration-300 px-2 py-1 ${
                         active || megaMenuOpen
-                          ? scrolled ? "text-[#182E72] active" : "text-white active"
-                          : scrolled 
-                            ? "text-[#182E72] hover:text-[#2848A0]" 
-                            : "text-white hover:text-white/80"
+                          ? 'active'
+                          : ''
                       }`}
+                      style={{
+                        fontFamily: "'Poppins', sans-serif",
+                        fontWeight: 500,
+                        letterSpacing: '1px',
+                        fontSize: '15px',
+                        color: (active || megaMenuOpen) ? '#D19701' : '#ffff',
+                      }}
                     >
                       {item.label}
                       <ChevronDown
                         size={16}
                         className={`transition-all duration-300 ${
                           megaMenuOpen ? "rotate-180" : ""
-                        } ${scrolled ? "text-[#6B7280]" : "text-white/70"}`}
+                        }`}
+                        style={{ color: (active || megaMenuOpen) ? '#D19701' : '#666666' }}
                       />
                     </button>
 
                     {/* FULL-WIDTH MEGA MENU */}
                     <div
                       ref={megaMenuRef}
-                      className={`absolute left-0 w-full min-w-[1200px] max-w-[90vw] mt-2 bg-white border-t border-[#E5E7EB] shadow-2xl transition-all duration-300 ease-out origin-top ${
+                      className={`absolute left-0 transition-all duration-300 ease-out origin-top ${
                         megaMenuOpen 
                           ? "opacity-100 scale-y-100 pointer-events-auto" 
                           : "opacity-0 scale-y-95 pointer-events-none"
@@ -346,113 +328,151 @@ const Navbar = ({ toggleMenu, contactData }) => {
                         overflowY: "auto",
                         transformOrigin: "top center",
                         width: "1200px",
+                        background: '#FFFFFF',
+                        border: '1px solid #EFE7C8',
+                        borderRadius: '20px',
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.08)',
+                        padding: '40px',
+                        marginTop: '12px',
                       }}
                       onMouseEnter={handleMegaMenuMouseEnter}
                       onMouseLeave={handleMegaMenuMouseLeave}
                     >
-                      <div className="px-6 py-8">
-                        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-                          {/* MEN Column */}
-                          <div>
-                            <h3 className="text-sm font-bold text-[#182E72] uppercase tracking-wider mb-4">
-                              {megaMenuData.men.title}
-                            </h3>
-                            <ul className="space-y-2">
-                              {megaMenuData.men.categories.map((cat) => (
-                                <li key={cat}>
-                                  <button
-                                    onClick={() => handleCategoryClick(cat)}
-                                    className="text-[#6B7280] hover:text-[#182E72] transition-colors text-left w-full py-1 hover:translate-x-1 transform duration-200"
-                                  >
-                                    {cat}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                      <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+                        {/* MEN Column */}
+                        <div>
+                          <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#111111' }}>
+                            {megaMenuData.men.title}
+                          </h3>
+                          <ul className="space-y-2">
+                            {megaMenuData.men.categories.map((cat) => (
+                              <li key={cat}>
+                                <button
+                                  onClick={() => handleCategoryClick(cat)}
+                                  className="mega-link transition-all duration-300 text-left w-full"
+                                  style={{
+                                    color: '#666666',
+                                    fontSize: '0.875rem',
+                                    padding: '4px 0',
+                                    fontFamily: "'Inter', sans-serif",
+                                  }}
+                                >
+                                  {cat}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
 
-                          {/* WOMEN Column */}
-                          <div>
-                            <h3 className="text-sm font-bold text-[#182E72] uppercase tracking-wider mb-4">
-                              {megaMenuData.women.title}
-                            </h3>
-                            <ul className="space-y-2">
-                              {megaMenuData.women.categories.map((cat) => (
-                                <li key={cat}>
-                                  <button
-                                    onClick={() => handleCategoryClick(cat)}
-                                    className="text-[#6B7280] hover:text-[#182E72] transition-colors text-left w-full py-1 hover:translate-x-1 transform duration-200"
-                                  >
-                                    {cat}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                        {/* WOMEN Column */}
+                        <div>
+                          <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#111111' }}>
+                            {megaMenuData.women.title}
+                          </h3>
+                          <ul className="space-y-2">
+                            {megaMenuData.women.categories.map((cat) => (
+                              <li key={cat}>
+                                <button
+                                  onClick={() => handleCategoryClick(cat)}
+                                  className="mega-link transition-all duration-300 text-left w-full"
+                                  style={{
+                                    color: '#666666',
+                                    fontSize: '0.875rem',
+                                    padding: '4px 0',
+                                    fontFamily: "'Inter', sans-serif",
+                                  }}
+                                >
+                                  {cat}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
 
-                          {/* KIDS Column */}
-                          <div>
-                            <h3 className="text-sm font-bold text-[#182E72] uppercase tracking-wider mb-4">
-                              {megaMenuData.kids.title}
-                            </h3>
-                            <ul className="space-y-2">
-                              {megaMenuData.kids.categories.map((cat) => (
-                                <li key={cat}>
-                                  <button
-                                    onClick={() => handleCategoryClick(cat)}
-                                    className="text-[#6B7280] hover:text-[#182E72] transition-colors text-left w-full py-1 hover:translate-x-1 transform duration-200"
-                                  >
-                                    {cat}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                        {/* KIDS Column */}
+                        <div>
+                          <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#111111' }}>
+                            {megaMenuData.kids.title}
+                          </h3>
+                          <ul className="space-y-2">
+                            {megaMenuData.kids.categories.map((cat) => (
+                              <li key={cat}>
+                                <button
+                                  onClick={() => handleCategoryClick(cat)}
+                                  className="mega-link transition-all duration-300 text-left w-full"
+                                  style={{
+                                    color: '#666666',
+                                    fontSize: '0.875rem',
+                                    padding: '4px 0',
+                                    fontFamily: "'Inter', sans-serif",
+                                  }}
+                                >
+                                  {cat}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
 
-                          {/* FEATURED Column */}
-                          <div>
-                            <h3 className="text-sm font-bold text-[#182E72] uppercase tracking-wider mb-4">
-                              {megaMenuData.featured.title}
-                            </h3>
-                            <ul className="space-y-2">
-                              {megaMenuData.featured.categories.map((cat) => (
-                                <li key={cat}>
-                                  <button
-                                    onClick={() => handleCategoryClick(cat)}
-                                    className="text-[#6B7280] hover:text-[#182E72] transition-colors text-left w-full py-1 hover:translate-x-1 transform duration-200"
-                                  >
-                                    {cat}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                        {/* FEATURED Column */}
+                        <div>
+                          <h3 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: '#111111' }}>
+                            {megaMenuData.featured.title}
+                          </h3>
+                          <ul className="space-y-2">
+                            {megaMenuData.featured.categories.map((cat) => (
+                              <li key={cat}>
+                                <button
+                                  onClick={() => handleCategoryClick(cat)}
+                                  className="mega-link transition-all duration-300 text-left w-full"
+                                  style={{
+                                    color: '#666666',
+                                    fontSize: '0.875rem',
+                                    padding: '4px 0',
+                                    fontFamily: "'Inter', sans-serif",
+                                  }}
+                                >
+                                  {cat}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
 
-                          {/* PROMOTION Column */}
-                          <div className="bg-[#E9EEFF] rounded-lg p-6 flex flex-col items-center justify-center text-center">
-                            <div className="w-full aspect-[4/3] bg-[#182E72]/10 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
-                              <img
-                                src={megaMenuData.promotion.image}
-                                alt={megaMenuData.promotion.alt}
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                            <h4 className="text-lg font-bold text-[#182E72] mb-1">
-                              {megaMenuData.promotion.description}
-                            </h4>
-                            <p className="text-2xl font-black text-[#DC2626] mb-2">
-                              {megaMenuData.promotion.discount}
-                            </p>
-                            <button
-                              onClick={() => {
-                                navigate("/products/sale");
-                                setMegaMenuOpen(false);
-                              }}
-                              className="bg-[#182E72] text-white text-sm px-6 py-2 rounded-lg hover:bg-[#2848A0] transition-all duration-300 hover:shadow-lg hover:scale-105"
-                            >
-                              {megaMenuData.promotion.buttonText}
-                            </button>
+                        {/* PROMOTION Column */}
+                        <div className="rounded-lg p-6 flex flex-col items-center justify-center text-center" style={{ background: '#FDFBD4', borderRadius: '18px' }}>
+                          <div className="w-full aspect-[4/3] rounded-lg flex items-center justify-center mb-4 overflow-hidden" style={{ background: '#FDFBD4' }}>
+                            <img
+                              src={megaMenuData.promotion.image}
+                              alt={megaMenuData.promotion.alt}
+                              className="w-full h-full object-cover"
+                              style={{ borderRadius: '12px' }}
+                            />
                           </div>
+                          <h4 className="text-lg font-bold mb-1" style={{ color: '#111111' }}>
+                            {megaMenuData.promotion.description}
+                          </h4>
+                          <p className="text-2xl font-black mb-2" style={{ color: '#D19701' }}>
+                            {megaMenuData.promotion.discount}
+                          </p>
+                          <button
+                            onClick={() => {
+                              navigate("/products/sale");
+                              setMegaMenuOpen(false);
+                            }}
+                            className="text-sm px-6 py-3 transition-all duration-300 hover:scale-105"
+                            style={{
+                              background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                              color: '#5A3A00',
+                              borderRadius: '14px',
+                              border: '1px solid #C38A00',
+                              boxShadow: '0 10px 25px rgba(209,151,1,0.35)',
+                              fontWeight: 500,
+                              fontFamily: "'Inter', sans-serif",
+                            }}
+                          >
+                            {megaMenuData.promotion.buttonText}
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -464,13 +484,17 @@ const Navbar = ({ toggleMenu, contactData }) => {
                 <button
                   key={item.id}
                   onClick={() => navigate(item.path)}
-                  className={`nav-link relative tracking-wide transition-all duration-300 text-base md:text-lg ${
-                    active 
-                      ? scrolled ? "text-[#182E72] active" : "text-white active"
-                      : scrolled 
-                        ? "text-[#182E72] hover:text-[#2848A0]" 
-                        : "text-white hover:text-white/80"
+                  className={`nav-link relative transition-all duration-300 ${
+                    active ? 'active' : ''
                   }`}
+                  style={{
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 500,
+                    letterSpacing: '1px',
+                    fontSize: '15px',
+                    color: active ? '#D19701' : '#fff',
+                    padding: '8px 0',
+                  }}
                 >
                   {item.label}
                 </button>
@@ -480,19 +504,21 @@ const Navbar = ({ toggleMenu, contactData }) => {
         </nav>
 
         {/* RIGHT: ICONS */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-6">
           {/* CART */}
           <button
             onClick={() => navigate("/cart")}
             className="relative transition-all duration-300 hover:scale-110"
             aria-label="Cart"
           >
-            <ShoppingCart size={22} className={`transition-colors duration-300 ${
-              scrolled ? "text-[#182E72]" : "text-white"
-            }`} />
+            <ShoppingCart size={22} className="transition-colors duration-300" style={{ color: '#fff' }} />
             {cartCount > 0 && (
               <span
-                className="absolute -top-2 -right-2 w-5 h-5 rounded-full text-[11px] font-bold flex items-center justify-center text-white bg-[#182E72]"
+                className="absolute -top-2 -right-2 w-5 h-5 rounded-full text-[11px] font-bold flex items-center justify-center"
+                style={{
+                  background: '#D19701',
+                  color: '#FFFFFF',
+                }}
               >
                 {cartCount}
               </span>
@@ -506,27 +532,31 @@ const Navbar = ({ toggleMenu, contactData }) => {
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                 className="flex items-center gap-2 hover-lift"
               >
-                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white transition-all duration-300 ${
-                  scrolled ? "bg-[#182E72]" : "bg-white/20 backdrop-blur-sm"
-                }`}>
+                <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white transition-all duration-300" style={{ background: '#D19701' }}>
                   {getInitials(user?.name)}
                 </div>
                 <ChevronDown
                   size={16}
                   className={`transition-all duration-300 ${
                     userDropdownOpen ? "rotate-180" : ""
-                  } ${scrolled ? "text-[#6B7280]" : "text-white/70"}`}
+                  }`}
+                  style={{ color: '#666666' }}
                 />
               </button>
 
               {userDropdownOpen && (
                 <div
-                  className="absolute right-0 mt-3 w-60 rounded-lg shadow-xl bg-white border border-[#E5E7EB]"
-                  style={{ zIndex: 100 }}
+                  className="absolute right-0 mt-3 w-60 rounded-xl shadow-xl bg-white border"
+                  style={{ 
+                    zIndex: 100,
+                    borderColor: '#EFE7C8',
+                    borderRadius: '16px',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.08)',
+                  }}
                 >
-                  <div className="p-4 border-b border-[#E5E7EB]">
-                    <p className="font-medium text-[#182E72]">{user?.name}</p>
-                    <p className="text-xs text-[#6B7280]">{user?.email}</p>
+                  <div className="p-4 border-b" style={{ borderColor: '#EFE7C8' }}>
+                    <p className="font-medium" style={{ color: '#111111' }}>{user?.name}</p>
+                    <p className="text-xs" style={{ color: '#666666' }}>{user?.email}</p>
                   </div>
 
                   <div className="py-2">
@@ -535,9 +565,10 @@ const Navbar = ({ toggleMenu, contactData }) => {
                         navigate("/profile");
                         setUserDropdownOpen(false);
                       }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-[#F8FAFC] text-[#111827] transition"
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm transition"
+                      style={{ color: '#111111' }}
                     >
-                      <User size={16} className="text-[#6B7280]" /> Profile
+                      <User size={16} style={{ color: '#666666' }} /> Profile
                     </button>
 
                     <button
@@ -545,16 +576,18 @@ const Navbar = ({ toggleMenu, contactData }) => {
                         navigate("/orders");
                         setUserDropdownOpen(false);
                       }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-[#F8FAFC] text-[#111827] transition"
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm transition"
+                      style={{ color: '#111111' }}
                     >
-                      <ShoppingCart size={16} className="text-[#6B7280]" /> My Orders
+                      <ShoppingCart size={16} style={{ color: '#666666' }} /> My Orders
                     </button>
 
-                    <div className="my-2 mx-4 h-px bg-[#E5E7EB]" />
+                    <div className="my-2 mx-4 h-px" style={{ background: '#EFE7C8' }} />
 
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-[#F8FAFC] transition text-[#DC2626]"
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm transition"
+                      style={{ color: '#DC2626' }}
                     >
                       <X size={16} /> Logout
                     </button>
@@ -565,27 +598,36 @@ const Navbar = ({ toggleMenu, contactData }) => {
           ) : (
             <button
               onClick={() => navigate("/login")}
-              className={`px-4 py-2 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-                scrolled 
-                  ? "bg-[#182E72] hover:bg-[#2848A0]" 
-                  : "bg-white/20 backdrop-blur-sm hover:bg-white/30"
-              }`}
+              className="transition-all duration-300 hover:scale-105 hover:-translate-y-1"
+              style={{
+                background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                color: '#5A3A00',
+                borderRadius: '14px',
+                padding: '9px 34px',
+                border: '1px solid #C38A00',
+                boxShadow: '0 10px 25px rgba(209,151,1,0.35)',
+                fontWeight: 500,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: '0.875rem',
+                fontWeight: 700,
+                
+              }}
             >
-              Login
+              LOGIN
             </button>
           )}
 
           {/* MOBILE MENU */}
           <button className="md:hidden transition-all duration-300 hover:scale-110" onClick={toggleMenu} aria-label="Menu">
-            <Menu size={28} className={scrolled ? "text-[#182E72]" : "text-white"} />
+            <Menu size={28} style={{ color: '#111111' }} />
           </button>
         </div>
       </div>
 
       {/* CSS ANIMATION */}
-      <style jsx>{`
+      <style>{`
         /* Poppins Font for all navbar text */
-        .font-heading {
+        * {
           font-family: 'Poppins', sans-serif;
         }
 
@@ -604,45 +646,66 @@ const Navbar = ({ toggleMenu, contactData }) => {
         }
 
         .overflow-y-auto::-webkit-scrollbar-track {
-          background: #F1F5F9;
+          background: #F5F0E0;
           border-radius: 4px;
         }
 
         .overflow-y-auto::-webkit-scrollbar-thumb {
-          background: #182E72;
+          background: #D19701;
           border-radius: 4px;
         }
 
         .overflow-y-auto {
           scrollbar-width: thin;
-          scrollbar-color: #182E72 #F1F5F9;
+          scrollbar-color: #D19701 #F5F0E0;
         }
 
-        /* Hover effect for nav links - White underline on transparent background */
+        /* Hover effect for nav links - Gold underline */
         .nav-link {
           position: relative;
           font-family: 'Poppins', sans-serif;
-          font-size: 1rem;
+          font-weight: 500;
+          letter-spacing: 1px;
+          font-size: 15px;
+          padding: 8px 0;
         }
 
         .nav-link::after {
           content: "";
           position: absolute;
           bottom: -2px;
-          left: 0;
+          left: 50%;
+          transform: translateX(-50%);
           width: 0;
-          height: 2px;
-          background: ${scrolled ? '#182E72' : '#FFFFFF'};
-          transition: width 0.3s ease;
+          height: 3px;
+          border-radius: 2px;
+          background: linear-gradient(90deg, #B67E00, #D19701, #FFF19C, #D19701, #B67E00);
+          transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .nav-link:hover::after {
-          width: 100%;
+          width: 32px;
         }
 
         .nav-link.active::after {
-          width: 100%;
-          background: ${scrolled ? '#182E72' : '#FFFFFF'};
+          width: 32px;
+        }
+
+        .nav-link:hover {
+          color: #D19701 !important;
+        }
+
+        /* Mega menu link styles */
+        .mega-link {
+          position: relative;
+          display: inline-block;
+          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+          padding-left: 0;
+        }
+
+        .mega-link:hover {
+          color: #D19701 !important;
+          padding-left: 12px;
         }
 
         /* Ensure mega menu doesn't get clipped */
@@ -650,9 +713,16 @@ const Navbar = ({ toggleMenu, contactData }) => {
           overflow: visible !important;
         }
 
-        /* Mega menu links with Poppins */
-        .mega-link {
-          font-family: 'Poppins', sans-serif;
+        /* Dropdown animation */
+        .dropdown-enter {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+
+        .dropdown-enter-active {
+          opacity: 1;
+          transform: translateY(0);
+          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         /* Responsive adjustments */
@@ -662,18 +732,31 @@ const Navbar = ({ toggleMenu, contactData }) => {
           }
         }
 
-        /* Desktop nav link size */
-        @media (min-width: 768px) {
-          .nav-link {
-            font-size: 0.95rem;
+        @media (max-width: 768px) {
+          .navbar-container {
+            padding: 0 20px !important;
+            height: 72px !important;
           }
         }
 
-        /* Large screens */
-        @media (min-width: 1024px) {
-          .nav-link {
-            font-size: 1rem;
+        @media (max-width: 1024px) {
+          .navbar-container {
+            padding: 0 30px !important;
           }
+        }
+
+        /* Hover lift for icons */
+        .hover-lift {
+          transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .hover-lift:hover {
+          transform: translateY(-2px);
+        }
+
+        /* Cart icon hover */
+        .cart-icon:hover {
+          color: #D19701 !important;
         }
       `}</style>
     </header>

@@ -36,20 +36,20 @@ const ProductPage2 = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
   
-  // Dummy product data
+  // Dummy product data with gold theme prices
   const products = [
-    { id: 1, name: 'Classic White T-Shirt', brand: 'Nike', price: 29.99, rating: 4.5, reviews: 128, color: 'White', size: 'M', material: 'Cotton', fit: 'Regular', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop', isNew: true, isSale: false, discount: 0 },
-    { id: 2, name: 'Premium Black Tee', brand: 'Adidas', price: 34.99, rating: 4.8, reviews: 89, color: 'Black', size: 'L', material: 'Cotton', fit: 'Slim', image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=500&fit=crop', isNew: false, isSale: true, discount: 20 },
-    { id: 3, name: 'Vintage Graphic T-Shirt', brand: 'Puma', price: 39.99, rating: 4.3, reviews: 156, color: 'Navy', size: 'XL', material: 'Polyester', fit: 'Regular', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop', isNew: true, isSale: false, discount: 0 },
-    { id: 4, name: 'Performance Dry-Fit Tee', brand: 'Under Armour', price: 44.99, rating: 4.7, reviews: 203, color: 'Red', size: 'S', material: 'Polyester', fit: 'Athletic', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
-    { id: 5, name: 'Classic Striped T-Shirt', brand: 'Nike', price: 32.99, rating: 4.2, reviews: 67, color: 'Blue', size: 'M', material: 'Cotton', fit: 'Regular', image: 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&h=500&fit=crop', isNew: false, isSale: true, discount: 15 },
-    { id: 6, name: 'Premium Cotton Crew', brand: 'Adidas', price: 27.99, rating: 4.6, reviews: 94, color: 'Gray', size: 'L', material: 'Cotton', fit: 'Slim', image: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400&h=500&fit=crop', isNew: true, isSale: false, discount: 0 },
-    { id: 7, name: 'Essential Logo Tee', brand: 'Puma', price: 24.99, rating: 4.1, reviews: 45, color: 'Black', size: 'XL', material: 'Cotton', fit: 'Regular', image: 'https://images.unsplash.com/photo-1504593811423-6dd665756598?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
-    { id: 8, name: 'Sport Mesh T-Shirt', brand: 'Under Armour', price: 49.99, rating: 4.9, reviews: 312, color: 'White', size: 'S', material: 'Polyester', fit: 'Athletic', image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&h=500&fit=crop', isNew: false, isSale: true, discount: 25 },
-    { id: 9, name: 'Heritage Logo Tee', brand: 'Nike', price: 34.99, rating: 4.4, reviews: 78, color: 'Red', size: 'M', material: 'Cotton', fit: 'Regular', image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&h=500&fit=crop', isNew: true, isSale: false, discount: 0 },
-    { id: 10, name: 'Ultra-Soft V-Neck', brand: 'Adidas', price: 29.99, rating: 4.7, reviews: 134, color: 'Navy', size: 'L', material: 'Cotton', fit: 'Slim', image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
-    { id: 11, name: 'Graphic Art T-Shirt', brand: 'Puma', price: 42.99, rating: 4.3, reviews: 56, color: 'Gray', size: 'XL', material: 'Polyester', fit: 'Regular', image: 'https://images.unsplash.com/photo-1578587018450-5f847d2aa7ab?w=400&h=500&fit=crop', isNew: false, isSale: true, discount: 10 },
-    { id: 12, name: 'Pro Training Tee', brand: 'Under Armour', price: 39.99, rating: 4.8, reviews: 167, color: 'Black', size: 'S', material: 'Polyester', fit: 'Athletic', image: 'https://images.unsplash.com/photo-1565693413579-d84eac5bf60c?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
+    { id: 1, name: 'Classic White T-Shirt', brand: 'Nike', price: 29.99, oldPrice: 39.99, rating: 4.5, reviews: 128, color: 'White', size: 'M', material: 'Cotton', fit: 'Regular', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop', isNew: true, isSale: true, discount: 25 },
+    { id: 2, name: 'Premium Black Tee', brand: 'Adidas', price: 34.99, oldPrice: null, rating: 4.8, reviews: 89, color: 'Black', size: 'L', material: 'Cotton', fit: 'Slim', image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
+    { id: 3, name: 'Vintage Graphic T-Shirt', brand: 'Puma', price: 39.99, oldPrice: 49.99, rating: 4.3, reviews: 156, color: 'Navy', size: 'XL', material: 'Polyester', fit: 'Regular', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop', isNew: true, isSale: true, discount: 20 },
+    { id: 4, name: 'Performance Dry-Fit Tee', brand: 'Under Armour', price: 44.99, oldPrice: null, rating: 4.7, reviews: 203, color: 'Red', size: 'S', material: 'Polyester', fit: 'Athletic', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
+    { id: 5, name: 'Classic Striped T-Shirt', brand: 'Nike', price: 32.99, oldPrice: 42.99, rating: 4.2, reviews: 67, color: 'Blue', size: 'M', material: 'Cotton', fit: 'Regular', image: 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&h=500&fit=crop', isNew: false, isSale: true, discount: 23 },
+    { id: 6, name: 'Premium Cotton Crew', brand: 'Adidas', price: 27.99, oldPrice: null, rating: 4.6, reviews: 94, color: 'Gray', size: 'L', material: 'Cotton', fit: 'Slim', image: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400&h=500&fit=crop', isNew: true, isSale: false, discount: 0 },
+    { id: 7, name: 'Essential Logo Tee', brand: 'Puma', price: 24.99, oldPrice: null, rating: 4.1, reviews: 45, color: 'Black', size: 'XL', material: 'Cotton', fit: 'Regular', image: 'https://images.unsplash.com/photo-1504593811423-6dd665756598?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
+    { id: 8, name: 'Sport Mesh T-Shirt', brand: 'Under Armour', price: 49.99, oldPrice: 69.99, rating: 4.9, reviews: 312, color: 'White', size: 'S', material: 'Polyester', fit: 'Athletic', image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&h=500&fit=crop', isNew: false, isSale: true, discount: 29 },
+    { id: 9, name: 'Heritage Logo Tee', brand: 'Nike', price: 34.99, oldPrice: null, rating: 4.4, reviews: 78, color: 'Red', size: 'M', material: 'Cotton', fit: 'Regular', image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&h=500&fit=crop', isNew: true, isSale: false, discount: 0 },
+    { id: 10, name: 'Ultra-Soft V-Neck', brand: 'Adidas', price: 29.99, oldPrice: null, rating: 4.7, reviews: 134, color: 'Navy', size: 'L', material: 'Cotton', fit: 'Slim', image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
+    { id: 11, name: 'Graphic Art T-Shirt', brand: 'Puma', price: 42.99, oldPrice: 52.99, rating: 4.3, reviews: 56, color: 'Gray', size: 'XL', material: 'Polyester', fit: 'Regular', image: 'https://images.unsplash.com/photo-1578587018450-5f847d2aa7ab?w=400&h=500&fit=crop', isNew: false, isSale: true, discount: 19 },
+    { id: 12, name: 'Pro Training Tee', brand: 'Under Armour', price: 39.99, oldPrice: null, rating: 4.8, reviews: 167, color: 'Black', size: 'S', material: 'Polyester', fit: 'Athletic', image: 'https://images.unsplash.com/photo-1565693413579-d84eac5bf60c?w=400&h=500&fit=crop', isNew: false, isSale: false, discount: 0 },
   ];
 
   const brands = ['Nike', 'Adidas', 'Puma', 'Under Armour', 'Ralph Lauren', 'Zara'];
@@ -103,13 +103,13 @@ const ProductPage2 = () => {
     setCurrentPage(1);
   };
 
-  // Render stars
+  // Render stars - Gold Theme
   const renderStars = (rating) => {
     return [...Array(5)].map((_, i) => (
       <Star 
         key={i} 
         size={14} 
-        className={i < Math.floor(rating) ? 'text-[#FDBA12] fill-current' : 'text-[#E5E7EB]'}
+        className={i < Math.floor(rating) ? 'text-[#D19701] fill-current' : 'text-[#EFE7C8]'}
       />
     ));
   };
@@ -143,19 +143,17 @@ const ProductPage2 = () => {
 
 
   return (
-    <div className="bg-[#F8FAFC] min-h-screen">
+    <div className="bg-[#FFFFFF] min-h-screen">
       {/* ===== HERO VIDEO SECTION ===== */}
-     <PromotionVideo/>
-
     
 
-      {/* ===== PAGE HEADER ===== */}
-      <div className="bg-white border-b border-[#E5E7EB]">
+      {/* ===== PAGE HEADER - Gold Theme ===== */}
+      <div className="bg-white border-b border-[#EFE7C8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="font-heading text-2xl md:text-3xl text-[#111827] mb-1">Men's T-Shirts</h1>
-              <p className="text-[#6B7280] text-sm">Premium Cotton Collection • {sortedProducts.length} Products</p>
+              <h1 className="font-heading text-2xl md:text-3xl text-[#111111] mb-1">Men's T-Shirts</h1>
+              <p className="text-[#666666] text-sm">Premium Cotton Collection • {sortedProducts.length} Products</p>
             </div>
           </div>
         </div>

@@ -1,161 +1,196 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { 
-  Star, 
-  Heart, 
-  Eye, 
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Star,
+  Heart,
+  Eye,
   Sparkles,
   Zap,
   ChevronLeft,
-  ChevronRight
-} from 'lucide-react';
+  ChevronRight,
+  ArrowRight,
+} from "lucide-react";
 
 const ProductSection = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('All');
+  const [activeTab, setActiveTab] = useState("All");
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [wishlist, setWishlist] = useState([]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const scrollRef = useRef(null);
 
-  const tabs = ['All', 'Men', 'Women', 'Kids', 'Accessories'];
+  const tabs = ["All", "Men", "Women", "Kids", "Accessories"];
 
   const products = [
     {
-      id: 1,
-      name: 'Classic White T-Shirt',
-      brand: 'Nike',
-      price: 29.99,
-      oldPrice: 39.99,
-      rating: 4.8,
-      reviews: 128,
-      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop&auto=format',
-      category: 'Men',
-      isNew: true,
-      isSale: true,
-      discount: 25
-    },
-    {
-      id: 2,
-      name: 'Premium Black Tee',
-      brand: 'Adidas',
-      price: 34.99,
-      oldPrice: null,
-      rating: 4.9,
-      reviews: 89,
-      image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=500&fit=crop&auto=format',
-      category: 'Men',
-      isNew: false,
-      isSale: false
-    },
-    {
-      id: 3,
-      name: 'Vintage Graphic T-Shirt',
-      brand: 'Puma',
-      price: 39.99,
-      oldPrice: 49.99,
-      rating: 4.6,
-      reviews: 156,
-      image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop&auto=format',
-      category: 'Men',
-      isNew: true,
-      isSale: true,
-      discount: 20
-    },
-    {
       id: 4,
-      name: 'Performance Dry-Fit Tee',
-      brand: 'Under Armour',
-      price: 44.99,
-      oldPrice: null,
-      rating: 4.7,
-      reviews: 203,
-      image: 'https://images.unsplash.com/photo-1556821869-7a4c6c76a1e9?w=400&h=500&fit=crop&auto=format',
-      category: 'Men',
+      name: "Performance Dry-Fit Tee",
+      brand: "HELLCAT",
+      price: 449,
+      oldPrice: 2799,
+      rating: 4.3,
+      reviews: 2800,
+      image: "/image/product/product1.png",
+      category: "Women",
       isNew: false,
-      isSale: false
+      isSale: true,
+      discount: 84,
+      description: "Performance dry-fit training tee",
     },
     {
       id: 5,
-      name: 'Classic Striped T-Shirt',
-      brand: 'Nike',
-      price: 32.99,
-      oldPrice: 42.99,
-      rating: 4.5,
-      reviews: 67,
-      image: 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&h=500&fit=crop&auto=format',
-      category: 'Men',
+      name: "Classic Striped T-Shirt",
+      brand: "HELLCAT",
+      price: 329,
+      oldPrice: 1799,
+      rating: 4.1,
+      reviews: 1900,
+      image: "/image/product/product2.png",
+      category: "Women",
       isNew: false,
       isSale: true,
-      discount: 23
+      discount: 82,
+      description: "Classic striped casual t-shirt",
     },
     {
       id: 6,
-      name: 'Premium Cotton Crew',
-      brand: 'Adidas',
-      price: 27.99,
-      oldPrice: null,
+      name: "Premium Cotton Crew",
+      brand: "HELLCAT",
+      price: 279,
+      oldPrice: 1899,
       rating: 4.4,
-      reviews: 94,
-      image: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400&h=500&fit=crop&auto=format',
-      category: 'Women',
+      reviews: 1500,
+      image: "/image/product/product3.jpg",
+      category: "Women",
       isNew: true,
-      isSale: false
+      isSale: true,
+      discount: 85,
+      description: "Premium cotton crew neck tee",
     },
     {
-      id: 7,
-      name: 'Essential Logo Tee',
-      brand: 'Puma',
-      price: 24.99,
-      oldPrice: null,
-      rating: 4.3,
-      reviews: 45,
-      image: 'https://images.unsplash.com/photo-1504593811423-6dd665756598?w=400&h=500&fit=crop&auto=format',
-      category: 'Kids',
+      id: 1,
+      name: "Classic White T-Shirt",
+      brand: "HELLCAT",
+      price: 299,
+      oldPrice: 1999,
+      rating: 4.0,
+      reviews: 5800,
+      image:
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop&auto=format",
+      category: "Men",
+      isNew: true,
+      isSale: true,
+      discount: 85,
+      description: "Premium cotton classic white t-shirt",
+    },
+    {
+      id: 2,
+      name: "Premium Black Tee",
+      brand: "HELLCAT",
+      price: 349,
+      oldPrice: 2199,
+      rating: 4.5,
+      reviews: 4200,
+      image:
+        "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=500&fit=crop&auto=format",
+      category: "Men",
       isNew: false,
-      isSale: false
+      isSale: true,
+      discount: 84,
+      description: "Premium black essential t-shirt",
+    },
+    {
+      id: 3,
+      name: "Vintage Graphic Tee",
+      brand: "HELLCAT",
+      price: 399,
+      oldPrice: 2499,
+      rating: 4.2,
+      reviews: 3100,
+      image:
+        "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop&auto=format",
+      category: "Men",
+      isNew: true,
+      isSale: true,
+      discount: 84,
+      description: "Vintage graphic printed t-shirt",
+    },
+
+    {
+      id: 7,
+      name: "Essential Logo Tee",
+      brand: "HELLCAT",
+      price: 249,
+      oldPrice: 1599,
+      rating: 4.0,
+      reviews: 1200,
+      image:
+        "https://images.unsplash.com/photo-1504593811423-6dd665756598?w=400&h=500&fit=crop&auto=format",
+      category: "Kids",
+      isNew: false,
+      isSale: true,
+      discount: 84,
+      description: "Essential logo printed tee",
     },
     {
       id: 8,
-      name: 'Sport Mesh T-Shirt',
-      brand: 'Under Armour',
-      price: 49.99,
-      oldPrice: 69.99,
-      rating: 4.9,
-      reviews: 312,
-      image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&h=500&fit=crop&auto=format',
-      category: 'Women',
+      name: "Sport Mesh T-Shirt",
+      brand: "HELLCAT",
+      price: 499,
+      oldPrice: 2999,
+      rating: 4.7,
+      reviews: 2200,
+      image:
+        "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&h=500&fit=crop&auto=format",
+      category: "Women",
       isNew: false,
       isSale: true,
-      discount: 29
-    }
+      discount: 83,
+      description: "Sport mesh breathable t-shirt",
+    },
   ];
 
   // Filter products based on active tab
-  const filteredProducts = activeTab === 'All' 
-    ? products 
-    : products.filter(p => p.category === activeTab);
+  const filteredProducts =
+    activeTab === "All"
+      ? products
+      : products.filter((p) => p.category === activeTab);
 
   // Toggle wishlist
   const toggleWishlist = (productId, e) => {
     e.stopPropagation();
-    setWishlist(prev => 
-      prev.includes(productId) 
-        ? prev.filter(id => id !== productId)
-        : [...prev, productId]
+    setWishlist((prev) =>
+      prev.includes(productId)
+        ? prev.filter((id) => id !== productId)
+        : [...prev, productId],
     );
   };
 
   // Render stars
   const renderStars = (rating) => {
-    return [...Array(5)].map((_, i) => (
-      <Star 
-        key={i} 
-        size={14} 
-        className={i < Math.floor(rating) ? 'text-[#FDBA12] fill-current' : 'text-[#E5E7EB]'}
-      />
-    ));
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+
+    return (
+      <div className="flex items-center gap-0.5">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            size={12}
+            className={
+              i < fullStars ? "text-[#D19701] fill-current" : "text-[#D1D5DB]"
+            }
+          />
+        ))}
+        <span className="text-[11px] font-medium text-[#111111] ml-1">
+          {rating}
+        </span>
+        <span className="text-[11px] text-[#999999]">
+          ({(reviews / 1000).toFixed(1)}K)
+        </span>
+      </div>
+    );
   };
 
   // Update arrow enabled/disabled state based on scroll position
@@ -170,50 +205,63 @@ const ProductSection = () => {
   const scroll = (direction) => {
     const el = scrollRef.current;
     if (!el) return;
-    const cardWidth = el.firstChild ? el.firstChild.offsetWidth + 24 : 300; // +gap
-    el.scrollBy({ left: direction === 'left' ? -cardWidth * 2 : cardWidth * 2, behavior: 'smooth' });
+    const cardWidth = el.firstChild ? el.firstChild.offsetWidth + 28 : 238;
+    el.scrollBy({
+      left: direction === "left" ? -cardWidth * 2 : cardWidth * 2,
+      behavior: "smooth",
+    });
   };
 
   // Reset scroll position whenever the category changes, and re-check arrow state
   useEffect(() => {
     const el = scrollRef.current;
     if (el) {
-      el.scrollTo({ left: 0, behavior: 'auto' });
+      el.scrollTo({ left: 0, behavior: "auto" });
     }
-    // slight delay so scrollWidth reflects the new filtered list
     const timeout = setTimeout(updateScrollButtons, 50);
     return () => clearTimeout(timeout);
   }, [activeTab]);
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-[#111111] py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header - Premium Gold Styling */}
         <div className="text-center mb-10">
-          <span className="text-[#6B7280] text-xs uppercase tracking-[0.2em] font-medium">
+          <span className="text-[#D19701] text-xs uppercase tracking-[0.25em] font-semibold">
             Recommended
           </span>
-          <h2 className="font-heading text-3xl md:text-4xl text-[#111827] mt-2">
+          <h2 className="font-heading text-3xl md:text-4xl text-[#FFFFFF] mt-2">
             Best Selling Products
           </h2>
-          <p className="text-[#6B7280] text-sm mt-3 max-w-lg mx-auto">
+          <div className="flex justify-center mt-3">
+            <div className="h-[2px] w-16 bg-gradient-to-r from-[#B67E00] via-[#D19701] to-[#FFF19C] rounded-full" />
+          </div>
+          <p className="text-[#999999] text-sm mt-4 max-w-lg mx-auto">
             Discover our most loved collections crafted for every season.
           </p>
         </div>
 
-        {/* Tabs */}
+        {/* Tabs - Premium Gold Theme */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`
-                px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300
-                ${activeTab === tab 
-                  ? 'bg-[#182E72] text-white shadow-lg shadow-[#182E72]/25' 
-                  : 'bg-[#F8FAFC] text-[#6B7280] hover:bg-[#E9EEFF] hover:text-[#182E72]'
-                }
-              `}
+              className="px-5 py-2.5 rounded-[8px] text-sm font-medium transition-all duration-300"
+              style={{
+                height: "42px",
+                background:
+                  activeTab === tab
+                    ? "linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)"
+                    : "#222222",
+                color: activeTab === tab ? "#3E2500" : "#FFFFFF",
+                border:
+                  activeTab === tab ? "1px solid #B67E00" : "1px solid #555555",
+                boxShadow:
+                  activeTab === tab
+                    ? "0 8px 18px rgba(209,151,1,0.25)"
+                    : "none",
+              }}
             >
               {tab}
             </button>
@@ -222,30 +270,33 @@ const ProductSection = () => {
 
         {/* Row header — count left, slide arrows top-right */}
         <div className="flex items-center justify-between mb-4">
-          <p className="text-sm text-[#6B7280]">
-            <span className="text-[#111827] font-semibold">{filteredProducts.length}</span> products
+          <p className="text-sm text-[#999999]">
+            <span className="text-[#FFFFFF] font-semibold">
+              {filteredProducts.length}
+            </span>{" "}
+            products
           </p>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => scroll('left')}
+              onClick={() => scroll("left")}
               disabled={!canScrollLeft}
               aria-label="Scroll left"
-              className={`w-10 h-10 rounded-full border-2 border-[#182E72] flex items-center justify-center transition-all duration-200 ${
+              className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
                 canScrollLeft
-                  ? 'border-[#E5E7EB] text-[#182E72] hover:bg-[#182E72] hover:text-white hover:border-[#182E72] hover:shadow-md'
-                  : 'border-[#E5E7EB] text-[#D1D5DB] cursor-not-allowed'
+                  ? "border-[#D19701] text-[#D19701] hover:bg-[#D19701] hover:text-[#111111] hover:border-[#D19701] hover:shadow-md"
+                  : "border-[#333333] text-[#555555] cursor-not-allowed"
               }`}
             >
               <ChevronLeft size={18} />
             </button>
             <button
-              onClick={() => scroll('right')}
+              onClick={() => scroll("right")}
               disabled={!canScrollRight}
               aria-label="Scroll right"
-              className={`w-10 h-10 rounded-full border-2 border-[#182E72] flex items-center justify-center transition-all duration-200 ${
+              className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
                 canScrollRight
-                  ? 'border-[#E5E7EB] text-[#182E72] hover:bg-[#182E72] hover:text-white hover:border-[#182E72] hover:shadow-md'
-                  : 'border-[#E5E7EB] text-[#D1D5DB] cursor-not-allowed'
+                  ? "border-[#D19701] text-[#D19701] hover:bg-[#D19701] hover:text-[#111111] hover:border-[#D19701] hover:shadow-md"
+                  : "border-[#333333] text-[#555555] cursor-not-allowed"
               }`}
             >
               <ChevronRight size={18} />
@@ -257,39 +308,44 @@ const ProductSection = () => {
         <div
           ref={scrollRef}
           onScroll={updateScrollButtons}
-          className="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth snap-x snap-mandatory"
+          className="flex gap-7 overflow-x-auto pb-4 no-scrollbar scroll-smooth snap-x snap-mandatory"
         >
           {filteredProducts.map((product) => {
             const isWishlisted = wishlist.includes(product.id);
             const isHovered = hoveredProduct === product.id;
+            const reviews = product.reviews;
 
             return (
               <div
                 key={product.id}
-                className="group relative bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_60px_rgba(24,46,114,0.12)] hover:-translate-y-2 cursor-pointer flex-shrink-0 w-[240px] sm:w-[260px] snap-start"
+                className="group relative bg-[#FFFFFF] rounded-[8px] border border-[#ECECEC] overflow-hidden transition-all duration-300 hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:-translate-y-[6px] cursor-pointer flex-shrink-0 w-[210px] snap-start"
+                style={{ padding: "12px" }}
                 onMouseEnter={() => setHoveredProduct(product.id)}
                 onMouseLeave={() => setHoveredProduct(null)}
                 onClick={() => navigate(`/products-details/${product.id}`)}
               >
                 {/* Image Container */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-[#F8FAFC]">
+                <div
+                  className="relative overflow-hidden bg-[#F7F7F7] rounded-[6px]"
+                  style={{ height: "250px", width: "100%" }}
+                >
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-104"
                     loading="lazy"
                   />
 
                   {/* Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                  <div className="absolute top-2 left-2 flex flex-col gap-1">
                     {product.isNew && (
-                      <span className="bg-[#16A34A] text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1">
-                        <Sparkles size={12} /> New
+                      <span className="bg-[#111111] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Sparkles size={10} /> New
                       </span>
                     )}
                     {product.isSale && (
-                      <span className="bg-[#DC2626] text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1">
-                        <Zap size={12} /> -{product.discount}%
+                      <span className="bg-[#D19701] text-[#111111] text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Zap size={10} /> -{product.discount}%
                       </span>
                     )}
                   </div>
@@ -297,83 +353,111 @@ const ProductSection = () => {
                   {/* Wishlist Button */}
                   <button
                     onClick={(e) => toggleWishlist(product.id, e)}
-                    className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 ${
+                    className={`absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 ${
                       isWishlisted
-                        ? 'bg-[#182E72] text-white'
-                        : 'bg-white/90 backdrop-blur-sm text-[#6B7280] hover:bg-[#182E72] hover:text-white'
-                    } ${isHovered || isWishlisted ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                        ? "bg-[#D19701] text-[#111111]"
+                        : "bg-white/90 backdrop-blur-sm text-[#666666] hover:bg-[#D19701] hover:text-[#111111]"
+                    } ${isHovered || isWishlisted ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
                   >
-                    <Heart size={15} className={isWishlisted ? 'fill-current' : ''} />
+                    <Heart
+                      size={14}
+                      className={isWishlisted ? "fill-current" : ""}
+                    />
                   </button>
 
                   {/* Quick View — appears on hover */}
-                  <div className={`absolute bottom-3 left-0 right-0 flex items-center justify-center transition-all duration-300 ${
-                    isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-                  }`}>
+                  <div
+                    className={`absolute bottom-2 left-0 right-0 flex items-center justify-center transition-all duration-300 ${
+                      isHovered
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-2"
+                    }`}
+                  >
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         navigate(`/products-details/${product.id}`);
                       }}
-                      className="flex items-center gap-1.5 bg-white text-[#182E72] text-xs font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-[#182E72] hover:text-white transition-colors duration-300"
+                      className="flex items-center gap-1 text-[10px] font-semibold px-3 py-1.5 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)",
+                        color: "#3E2500",
+                        border: "1px solid #B67E00",
+                      }}
                     >
-                      <Eye size={14} /> Quick View
+                      <Eye size={12} /> Quick View
                     </button>
                   </div>
-
-                  {/* Subtle overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Product Info */}
-                <div className="p-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <p className="text-xs text-[#6B7280] uppercase tracking-wider font-medium">
-                        {product.brand}
-                      </p>
-                      <h4 className="font-semibold text-[#111827] text-sm mt-1 line-clamp-2">
-                        {product.name}
-                      </h4>
+                <div className="mt-3">
+                  {/* Brand and Rating */}
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-heading text-[18px] font-bold text-[#111111] uppercase tracking-[0.5px]">
+                      {product.brand}
+                    </h3>
+                    <div className="flex items-center gap-1 bg-[#F8F8F8] border border-[#E6E6E6] rounded-[4px] px-2 py-0.5">
+                      <Star size={11} className="text-[#D19701] fill-current" />
+                      <span className="text-[11px] font-medium text-[#111111]">
+                        {product.rating}
+                      </span>
+                      <span className="text-[11px] text-[#999999]">
+                        ({(reviews / 1000).toFixed(1)}K)
+                      </span>
                     </div>
-                    {product.isSale && (
-                      <div className="bg-[#FEF2F2] text-[#DC2626] text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0">
-                        SALE
-                      </div>
-                    )}
                   </div>
 
-                  {/* Rating */}
-                  <div className="flex items-center gap-1 mt-1.5">
-                    <div className="flex">{renderStars(product.rating)}</div>
-                    <span className="text-xs text-[#9CA3AF] ml-1">
-                      ({product.reviews})
-                    </span>
-                  </div>
+                  {/* Description */}
+                  <p
+                    className="text-[11px] text-[#777777] mt-1 line-clamp-2"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      lineHeight: "1.5",
+                    }}
+                  >
+                    {product.description}
+                  </p>
 
                   {/* Price */}
-                  <div className="flex items-center gap-2 mt-2">
-                    <span className="text-lg font-bold text-[#182E72]">
-                      ${product.price}
+                  <div className="flex items-end gap-2 mt-2">
+                    <span className="font-heading text-[24px] font-bold text-[#111111] leading-none">
+                      ₹{product.price}
                     </span>
-                    {product.oldPrice && (
-                      <span className="text-sm text-[#9CA3AF] line-through">
-                        ${product.oldPrice}
-                      </span>
-                    )}
+                    <span className="text-[14px] text-[#999999] line-through mb-1">
+                      ₹{product.oldPrice}
+                    </span>
+                    <span className="text-[14px] font-semibold text-[#5BAE3B] mb-1">
+                      ({product.discount}% off)
+                    </span>
                   </div>
 
-                  {/* View Button — appears on hover */}
-                  <button className={`
-                    w-full mt-3 py-2.5 rounded-xl text-sm font-medium
-                    transition-all duration-300
-                    ${isHovered 
-                      ? 'bg-[#182E72] text-white shadow-lg shadow-[#182E72]/25 translate-y-0 opacity-100' 
-                      : 'bg-[#F8FAFC] text-[#6B7280] translate-y-2 opacity-0'
-                    }
-                    hover:bg-[#2848A0] hover:shadow-xl
-                  `}>
-                    View Details
+                  {/* View Details Button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/products-details/${product.id}`);
+                    }}
+                    className="w-full mt-3 flex items-center justify-center gap-2 transition-all duration-300 hover:-translate-y-[2px]"
+                    style={{
+                      height: "44px",
+                      background:
+                        "linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)",
+                      color: "#3E2500",
+                      border: "1px solid #B67E00",
+                      borderRadius: "8px",
+                      fontFamily: "'Poppins', sans-serif",
+                      fontWeight: 600,
+                      fontSize: "15px",
+                      boxShadow: "0 4px 12px rgba(209,151,1,0.15)",
+                    }}
+                  >
+                    VIEW DETAILS
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    />
                   </button>
                 </div>
               </div>
@@ -384,10 +468,10 @@ const ProductSection = () => {
 
       <style jsx>{`
         .font-heading {
-          font-family: 'Poppins', sans-serif;
+          font-family: "Poppins", sans-serif;
           font-weight: 600;
         }
-        
+
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -403,7 +487,7 @@ const ProductSection = () => {
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
-        
+
         /* Hardware Acceleration */
         .group {
           transform: translateZ(0);
@@ -411,7 +495,7 @@ const ProductSection = () => {
           -webkit-backface-visibility: hidden;
           will-change: transform;
         }
-        
+
         .group img {
           transform: translateZ(0);
           backface-visibility: hidden;

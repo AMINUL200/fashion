@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Sparkles, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Sparkles, Send, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const CTALandingPage = () => {
   const [email, setEmail] = useState('');
@@ -16,84 +16,122 @@ const CTALandingPage = () => {
   };
 
   return (
-    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-[#FFFFFF] py-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto">
         <div 
-          className="relative bg-[#EEF2FF] rounded-[24px] overflow-hidden"
-          style={{ padding: '70px 70px 0px 70px' }}
+          className="relative rounded-[14px] overflow-hidden"
+          style={{
+            height: '620px',
+            position: 'relative',
+          }}
         >
-          {/* Decorative background elements */}
-          <div className="absolute top-10 right-16 w-24 h-24 border border-[#182E72]/10 rounded-full" />
-          <div className="absolute top-1/3 right-10 w-2 h-2 bg-[#182E72]/30 rounded-full" />
-          <div className="absolute bottom-1/4 right-24 w-3 h-3 bg-[#FDBA12]/40 rounded-full" />
-          <Sparkles className="absolute top-16 left-[38%] text-[#182E72]/20" size={28} />
-          <Sparkles className="absolute bottom-24 right-20 text-[#FDBA12]/50" size={20} />
+          {/* Full Background Image */}
+          <div className="absolute inset-0 w-full h-full">
+            <img
+              src="/image/cta.png"
+              alt="Luxury fashion background"
+              className="w-full h-full object-fill object-center"
+            />
+            {/* Dark overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/10 to-black/10" />
+          </div>
 
-          <div className="relative flex flex-col lg:flex-row items-center lg:items-end gap-8 lg:gap-4">
-            {/* LEFT — Model image, bottom aligned, slight overflow, drop shadow */}
-            <div className="relative w-full lg:w-[35%] flex-shrink-0 flex justify-center lg:justify-start order-2 lg:order-1">
-              <img
-                src="/cta_img.png"
-                alt="Fashion model"
-                className="relative w-[75%] sm:w-[60%] lg:w-full max-w-[320px] h-auto object-cover object-top"
-                style={{
-                  marginBottom: '-40px',
-                  filter: 'drop-shadow(0 30px 40px rgba(17,24,39,0.25))'
-                }}
-              />
-            </div>
+          {/* Luxury Background Elements - Golden Textures Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#D19701]/10 via-transparent to-[#D19701]/5" />
+          
+          {/* Soft golden brush strokes */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #D19701 0%, transparent 70%)' }} />
+          <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] rounded-full blur-3xl opacity-10" style={{ background: 'radial-gradient(circle, #B67E00 0%, transparent 70%)' }} />
+          
+          {/* Soft vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20" />
+          
+          {/* Subtle luxury glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-10" style={{ background: 'radial-gradient(circle, #FFF19C 0%, transparent 70%)' }} />
 
-            {/* RIGHT — Heading, description, form */}
-            <div className="w-full lg:w-[65%] flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2 pb-[70px]">
-              <span className="inline-flex items-center gap-2 text-[#182E72] text-xs uppercase tracking-[0.2em] font-semibold mb-4 bg-white px-3.5 py-1.5 rounded-full border border-[#182E72]/10">
-                <Mail size={13} />
+          {/* Decorative golden sparkles */}
+          <Sparkles className="absolute top-[15%] right-[20%] text-[#D19701]/30" size={32} />
+          <Sparkles className="absolute bottom-[30%] left-[45%] text-[#D19701]/20" size={24} />
+          <Sparkles className="absolute top-[60%] right-[10%] text-[#D19701]/15" size={20} />
+
+          {/* Gold accent gradient line - top */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#D19701] to-transparent opacity-60" />
+
+          {/* Gold accent gradient line - bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#D19701] to-transparent opacity-40" />
+          
+          <div className="flex flex-row items-center justify-center h-full relative z-10">
+            {/* Empty div - Hidden on mobile, visible on desktop */}
+            <div className="hidden md:block w-0 md:w-[350px] lg:w-[350px]"></div>
+            
+            {/* Content Container */}
+            <div className="relative h-full flex flex-col items-center justify-center px-8 lg:px-16 text-center">
+              {/* Newsletter Badge */}
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-[#111111] text-[14px] font-semibold px-[18px] py-[10px] rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.06)] border border-white/50 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <Mail size={16} className="text-[#D19701]" />
                 Newsletter
-              </span>
+              </div>
 
+              {/* Heading */}
               <h2
-                className="font-heading text-[#111827] leading-tight max-w-xl"
-                style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: '42px' }}
+                className="font-heading text-[56px] font-semibold text-white leading-[1.2] tracking-[1px] max-w-3xl"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 Get The Latest Deals
               </h2>
 
-              <p className="text-[#6B7280] text-base mt-4 max-w-md leading-relaxed">
+              {/* Description */}
+              <p className="text-[18px] text-white/90 max-w-[600px] leading-[1.7] mt-4" style={{ fontFamily: "'Inter', sans-serif" }}>
                 Subscribe to receive exclusive offers, new arrivals, and premium fashion updates.
               </p>
 
-              {/* Newsletter Form */}
+              {/* Email Box */}
               <form
                 onSubmit={handleSubmit}
-                className="w-full max-w-lg mt-8 flex items-center bg-white rounded-2xl shadow-[0_8px_30px_rgba(17,24,39,0.08)] border border-[#E5E7EB] p-2 pl-5 gap-2"
+                className="w-full max-w-[520px] mt-6 flex items-center bg-white rounded-[12px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-[#EFE7C8] p-2 gap-2"
+                style={{ height: '64px' }}
               >
-                <Mail size={18} className="text-[#9CA3AF] flex-shrink-0" />
+                <Mail size={18} className="text-[#999999] flex-shrink-0 ml-3" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className="flex-1 min-w-0 py-2.5 text-sm text-[#111827] placeholder:text-[#9CA3AF] outline-none bg-transparent"
+                  placeholder="your@mail.com"
+                  className="flex-1 min-w-0 text-[16px] text-[#111111] placeholder:text-[#999999] outline-none bg-transparent h-full"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
                 />
                 <button
                   type="submit"
-                  className="flex-shrink-0 flex items-center gap-2 bg-[#182E72] text-white text-sm font-semibold px-5 sm:px-6 py-3 rounded-xl transition-all duration-300 hover:bg-[#2848A0] hover:shadow-lg hover:scale-[1.03] active:scale-[0.98]"
+                  className="flex-shrink-0 flex items-center gap-2 text-[#4D3000] font-semibold px-[30px] transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_16px_32px_rgba(209,151,1,0.45)] active:scale-[0.98]"
+                  style={{
+                    height: '48px',
+                    background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                    borderRadius: '10px',
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 600,
+                    letterSpacing: '1px',
+                    fontSize: '14px',
+                    border: '1px solid #C38A00',
+                    boxShadow: '0 12px 24px rgba(209,151,1,0.35)',
+                  }}
                 >
                   {subscribed ? (
                     <>
                       <CheckCircle2 size={16} />
-                      <span className="hidden sm:inline">Subscribed</span>
+                      <span>SUBSCRIBED</span>
                     </>
                   ) : (
                     <>
-                      <span>Subscribe</span>
-                      <Send size={15} className="hidden sm:inline" />
+                      <span>SUBSCRIBE</span>
+                      <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                     </>
                   )}
                 </button>
               </form>
 
-              <p className="text-[#9CA3AF] text-xs mt-4">
+              {/* Small Text */}
+              <p className="text-[12px] text-white/85 mt-3" style={{ fontFamily: "'Inter', sans-serif" }}>
                 No spam. Unsubscribe anytime.
               </p>
             </div>

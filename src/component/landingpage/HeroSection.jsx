@@ -11,34 +11,34 @@ const HeroSection = () => {
       title: 'Summer Collection 2026',
       subtitle: 'Discover timeless style crafted for modern men & women.',
       buttonText: 'Shop Now',
-      image: '/image/hero/hero5.jpeg',
-      bgColor: 'from-[#182E72] to-[#2848A0]',
+      image: '/image/hero/banner.png',
+      bgColor: 'from-[#B67E00] to-[#D19701]',
       textColor: 'text-white',
       badge: 'New Arrival',
-      badgeColor: 'bg-[#16A34A]'
+      badgeColor: 'bg-[#000000]'
     },
     {
       id: 2,
       title: "Men's Premium Collection",
       subtitle: 'Elevate your wardrobe with timeless elegance and sophistication.',
       buttonText: 'Explore Men',
-      image: '/image/hero/hero7.jpeg',
-      bgColor: 'from-[#1A1A2E] to-[#16213E]',
+      image: '/image/hero/banner2.png',
+      bgColor: 'from-[#B67E00]/80 to-[#D19701]/80',
       textColor: 'text-white',
       badge: 'Premium',
-      badgeColor: 'bg-[#182E72]'
+      badgeColor: 'bg-[#D19701]'
     },
-    { id: 3, image: '/image/hero/hero3.jpeg' },
-    { id: 4, image: '/image/hero/hero9.jpeg' }
+    { id: 3, image: '/image/hero/banner3.png' },
+    // { id: 4, image: '/image/hero/hero9.jpeg' }
   ];
 
   const slides = allSlides.map(slide => ({
     ...slide,
     isImageOnly: !slide.title && !slide.subtitle && !slide.buttonText,
-    bgColor: slide.bgColor || 'from-[#182E72] to-[#2848A0]',
+    bgColor: slide.bgColor || 'from-[#B67E00] to-[#D19701]',
     textColor: slide.textColor || 'text-white',
     badge: slide.badge || null,
-    badgeColor: slide.badgeColor || 'bg-[#182E72]'
+    badgeColor: slide.badgeColor || 'bg-[#D19701]'
   }));
 
   const validSlides = slides.filter(slide => slide.image);
@@ -50,10 +50,10 @@ const HeroSection = () => {
       subtitle: 'Discover our latest collection of premium fashion.',
       buttonText: 'Shop Now',
       image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1400&h=600&fit=crop',
-      bgColor: 'from-[#182E72] to-[#2848A0]',
+      bgColor: 'from-[#B67E00] to-[#D19701]',
       textColor: 'text-white',
       badge: 'Featured',
-      badgeColor: 'bg-[#182E72]',
+      badgeColor: 'bg-[#D19701]',
       isImageOnly: false
     }
   ];
@@ -90,9 +90,9 @@ const HeroSection = () => {
   if (total === 0) return null;
 
   return (
-    <section className="hero-clip relative w-full bg-[#F8FAFC]">
+    <section className="hero-clip relative w-full bg-[#FFFFFF]">
       {/* Slides Container — the ONLY element with a defined height; every transform lives inside it */}
-      <div className="hero-clip relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
+      <div className="hero-clip relative w-full h-[500px] md:h-[600px] lg:h-[650px]">
         {finalSlides.map((slide, index) => {
           const isActive = index === currentSlide;
           return (
@@ -109,7 +109,7 @@ const HeroSection = () => {
                 <img
                   src={slide.image}
                   alt={slide.title || 'Hero banner'}
-                  className="hero-slide-img w-full h-full object-cover"
+                  className="hero-slide-img w-full h-full object-fill"
                   style={{ transform: isActive ? 'scale(1.06)' : 'scale(1)' }}
                   loading={index === 0 ? 'eager' : 'lazy'}
                   onError={(e) => {
@@ -117,7 +117,7 @@ const HeroSection = () => {
                   }}
                 />
                 {!slide.isImageOnly && (
-                  <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgColor} opacity-50`} />
+                  <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgColor} opacity-10`} />
                 )}
               </div>
 
@@ -143,7 +143,16 @@ const HeroSection = () => {
                       </p>
                     )}
                     {slide.buttonText && (
-                      <button className="group flex items-center gap-3 bg-white text-[#182E72] px-8 py-4 rounded-xl font-medium transition-all duration-300 hover:bg-[#182E72] hover:text-white hover:shadow-xl hover:scale-105 active:scale-95">
+                      <button className="group flex items-center gap-3 bg-white text-[#5A3A00] px-8 py-3 rounded-xl font-medium transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95"
+                        style={{
+                          background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                          color: '#5A3A00',
+                          borderRadius: '14px',
+                          border: '1px solid #C38A00',
+                          boxShadow: '0 10px 25px rgba(209,151,1,0.35)',
+                          fontFamily: "'Inter', sans-serif"
+                        }}
+                      >
                         <span>{slide.buttonText}</span>
                         <ShoppingBag size={20} className="transition-transform duration-300 group-hover:translate-x-1" />
                       </button>
@@ -151,7 +160,7 @@ const HeroSection = () => {
                   </div>
                 </div>
               ) : (
-                <div className="absolute inset-0 bg-black/10" />
+                <div className="absolute inset-0 bg-black/00" />
               )}
             </div>
           );
@@ -186,7 +195,7 @@ const HeroSection = () => {
               key={index}
               onClick={() => goToSlide(index)}
               className={`transition-all duration-300 rounded-full ${
-                index === currentSlide ? 'w-8 sm:w-10 h-2 sm:h-2.5 bg-white' : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/50 hover:bg-white/80'
+                index === currentSlide ? 'w-8 sm:w-10 h-2 sm:h-2.5 bg-[#D19701]' : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/50 hover:bg-white/80'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

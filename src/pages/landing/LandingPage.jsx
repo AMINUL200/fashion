@@ -14,6 +14,7 @@ import { useApp } from "../../context/AppContext";
 import FellowThinks from "../../component/landingpage/FellowThinks";
 import LatestProductSection from "../../component/landingpage/LatestProductSection";
 import CTALandingPage from "../../component/landingpage/CTALandingPage";
+import OurCollection from "../../component/landingpage/OurCollection";
 
 const LandingPage = () => {
   const {
@@ -35,17 +36,19 @@ const LandingPage = () => {
   if (loading) return <PageLoader />;
   return (
     <>
-      <PageHelmet title="Home - ONE REP MORE" />
+      <PageHelmet title="Home - APSARA" />
 
-      <div className=" text-white ">
+      <div className=" text-white pt-[70px]">
         {/* ================= HERO ================= */}
         <HeroSection heroData={bannerData} />
 
         <ProductCategory categoryData={categoryData} />
         {/* ================= Best Selling PRODUCTS ================= */}
         <ProductSection productData={premiumProduct} title="Premium Gym Products" />
+        {/* ================= Our Collection ================= */}
+        <OurCollection />
         {/* ================= Latest PRODUCTS ================= */}
-        <LatestProductSection/>
+        {/* <LatestProductSection/> */}
         {/* ================= CTA ================= */}
         <CTALandingPage />
        
