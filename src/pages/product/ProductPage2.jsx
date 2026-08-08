@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Star,
@@ -14,11 +14,20 @@ import {
   ProductList 
 } from '../../component/product';
 import PromotionVideo from '../../component/common/PromotionVideo';
+import PageLoader from '../../component/common/PageLoader';
 
 const ProductPage2 = () => {
   const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   
   // State for filters
@@ -140,6 +149,10 @@ const ProductPage2 = () => {
       setIsPlaying(!isPlaying);
     }
   };
+
+  if (loading) {
+    return <PageLoader/>;
+  }
 
 
   return (

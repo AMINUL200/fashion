@@ -619,7 +619,7 @@ const Navbar = ({ toggleMenu, contactData }) => {
 
           {/* MOBILE MENU */}
           <button className="md:hidden transition-all duration-300 hover:scale-110" onClick={toggleMenu} aria-label="Menu">
-            <Menu size={28} style={{ color: '#111111' }} />
+            <Menu size={28} style={{ color: '#fff' }} />
           </button>
         </div>
       </div>

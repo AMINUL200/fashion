@@ -30,6 +30,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import PromotionVideo from "../../component/common/PromotionVideo";
+import PageLoader from "../../component/common/PageLoader";
 
 const ProductDetailsPage = () => {
   const navigate = useNavigate();
@@ -44,6 +45,13 @@ const ProductDetailsPage = () => {
   const [activeTab, setActiveTab] = useState("description");
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const imageRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Simulate a 1-second loading time
+    return () => clearTimeout(timer);
+  }, []);
 
   const product = {
     id: 1,
@@ -303,6 +311,10 @@ const ProductDetailsPage = () => {
       />
     ));
   };
+
+  if (loading) {
+    return <PageLoader />;
+  }
 
   return (
     <div className="bg-[#FFFFFF] min-h-screen pt-30">
@@ -579,26 +591,7 @@ const ProductDetailsPage = () => {
                   </button>
                 </div>
 
-                {/* Secondary Actions - Wishlist & Share */}
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => setIsWishlist(!isWishlist)}
-                    className={`flex-1 h-[48px] rounded-[14px] border-2 transition-all duration-300 flex items-center justify-center gap-2 font-medium ${
-                      isWishlist
-                        ? "bg-[#D19701] text-white border-[#D19701] shadow-md shadow-[#D19701]/20"
-                        : "bg-white text-[#5A3A00] border-[#D19701] hover:bg-[#D19701] hover:text-white hover:shadow-lg hover:shadow-[#D19701]/20"
-                    }`}
-                  >
-                    <Heart
-                      size={18}
-                      className={isWishlist ? "fill-current" : ""}
-                    />
-                    {isWishlist ? "Wishlisted" : "Add to Wishlist"}
-                  </button>
-                  <button className="h-[48px] w-[48px] rounded-[14px] border-2 border-[#EFE7C8] flex items-center justify-center hover:border-[#D19701] hover:text-[#D19701] hover:bg-[#FDFBD4] transition-all duration-200">
-                    <Share2 size={18} />
-                  </button>
-                </div>
+              
               </div>
 
               {/* ===== Price Summary Bar ===== */}
