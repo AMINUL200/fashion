@@ -227,8 +227,8 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
 
         {hasSub && (
           <div
-            className={`overflow-hidden transition-all ${
-              open ? "max-h-[800px]" : "max-h-0"
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              open ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
             }`}
           >
             <div className="border-l border-[#EFE7C8] ml-4">
@@ -281,8 +281,8 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
 
         {item.dropdown && item.dropdown.length > 0 && (
           <div
-            className={`overflow-hidden transition-all ${
-              open ? "max-h-[1200px]" : "max-h-0"
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              open ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0"
             }`}
           >
             {item.dropdown.map((d) => renderDropdownItem(d))}
@@ -312,8 +312,8 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
           borderLeft: "1px solid #EFE7C8",
         }}
       >
-        {/* Header - Gold Theme */}
-        <div className="flex items-center justify-between p-6 border-b border-[#EFE7C8]" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
+        {/* Header - Gold Theme - Fixed at top */}
+        <div className="flex items-center justify-between p-6 border-b border-[#EFE7C8] flex-shrink-0" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
           <h2 className="text-xl font-heading font-bold">
             <span className="text-[#D19701]">APSARA</span>
           </h2>
@@ -326,20 +326,22 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
         </div>
 
         {/* Category Count Badge - Gold Theme */}
-        <div className="px-6 py-2 border-b border-[#EFE7C8] bg-white">
+        <div className="px-6 py-2 border-b border-[#EFE7C8] bg-white flex-shrink-0">
           <span className="text-xs text-[#666666]">
             Shop by Category
           </span>
         </div>
 
-        {/* Nav - Gold Theme */}
-        <nav className="flex-1 overflow-y-auto py-4 max-h-[calc(100vh-180px)] custom-scrollbar">
-          {sidebarLinks.map(renderNavItem)}
+        {/* Nav - Gold Theme - Scrollable middle section with proper overflow */}
+        <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4 custom-scrollbar">
+          <div className="space-y-1">
+            {sidebarLinks.map(renderNavItem)}
+          </div>
         </nav>
 
-        {/* Auth Section - Gold Theme */}
+        {/* Auth Section - Gold Theme - Fixed at bottom */}
         {!isAuthenticated ? (
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#EFE7C8]" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
+          <div className="flex-shrink-0 p-4 border-t border-[#EFE7C8]" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
             <button
               onClick={() => {
                 navigate("/login");
@@ -357,7 +359,7 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
             </button>
           </div>
         ) : (
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#EFE7C8]" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
+          <div className="flex-shrink-0 p-4 border-t border-[#EFE7C8]" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-[#5A3A00]" style={{ background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)' }}>
                 U
@@ -420,6 +422,48 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
         .active-gold {
           background: linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%);
           color: #5A3A00;
+        }
+
+        /* Sidebar container - flex column layout */
+        .sidebar-container {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+
+        /* Ensure nav takes remaining space and scrolls */
+        .nav-scroll {
+          flex: 1;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        /* Footer stays at bottom */
+        .sidebar-footer {
+          flex-shrink: 0;
+        }
+
+        /* Smooth dropdown transitions */
+        .dropdown-transition {
+          transition: max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                      opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Ensure dropdown content doesn't cause overflow issues */
+        .dropdown-content {
+          overflow: hidden;
+        }
+
+        /* Prevent horizontal scroll */
+        .overflow-x-hidden {
+          overflow-x: hidden;
+        }
+
+        /* Ensure the nav can scroll even with many items */
+        .nav-scrollable {
+          flex: 1 1 auto;
+          min-height: 0;
+          overflow-y: auto;
         }
       `}</style>
     </>

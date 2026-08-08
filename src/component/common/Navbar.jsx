@@ -598,7 +598,7 @@ const Navbar = ({ toggleMenu, contactData }) => {
           ) : (
             <button
               onClick={() => navigate("/login")}
-              className="transition-all duration-300 hover:scale-105 hover:-translate-y-1"
+              className="hidden md:block transition-all duration-300 hover:scale-105 hover:-translate-y-1"
               style={{
                 background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
                 color: '#5A3A00',

@@ -25,7 +25,7 @@ const RegisterPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    phone: "", // Added phone field
+    phone: "",
   });
   const { login } = useAuth();
   const [errors, setErrors] = useState({});
@@ -103,11 +103,11 @@ const RegisterPage = () => {
 
     const levels = [
       { strength: 0, label: "", color: "" },
-      { strength: 1, label: "Weak", color: "var(--color-primary)" },
-      { strength: 2, label: "Fair", color: "var(--color-warning)" },
-      { strength: 3, label: "Good", color: "var(--color-warning)" },
-      { strength: 4, label: "Strong", color: "var(--color-success)" },
-      { strength: 5, label: "Very Strong", color: "#16A34A" },
+      { strength: 1, label: "Weak", color: "#B67E00" },
+      { strength: 2, label: "Fair", color: "#D19701" },
+      { strength: 3, label: "Good", color: "#D19701" },
+      { strength: 4, label: "Strong", color: "#B67E00" },
+      { strength: 5, label: "Very Strong", color: "#5BAE3B" },
     ];
 
     return levels[strength];
@@ -142,7 +142,6 @@ const RegisterPage = () => {
       setIsLoading(true);
 
       try {
-        // Prepare data for API - send all required fields
         const registerData = {
           name: formData.name,
           email: formData.email,
@@ -161,18 +160,15 @@ const RegisterPage = () => {
             res.data.message || "Registration successful! Please login.",
           );
 
-          // Auto login after register
           if (res.data.data?.token && res.data.data?.user) {
             await login(res.data.data.user, res.data.data.token);
 
-            // Redirect based on role
             if (res.data.data.user.role === "admin") {
               navigate("/admin", { replace: true });
             } else {
               navigate("/", { replace: true });
             }
           } else {
-            // If auto-login fails, redirect to login page
             navigate("/login", {
               state: { message: "Registration successful! Please login." },
             });
@@ -184,7 +180,6 @@ const RegisterPage = () => {
       } catch (error) {
         console.error("Registration error:", error);
 
-        // Handle validation errors
         if (error.response?.status === 422) {
           const validationErrors = error.response.data?.errors || {};
           const formattedErrors = {};
@@ -208,56 +203,57 @@ const RegisterPage = () => {
 
   return (
     <>
-      <PageHelmet title="Register - ONE REP MORE" />
-      <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-main">
-        {/* Background decoration */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
+      <PageHelmet title="Register - APSARA" />
+      <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#FFFFFF]">
+        {/* Background decoration - Gold Theme */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div
-            className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl"
-            style={{ backgroundColor: "var(--color-primary)" }}
+            className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl opacity-10"
+            style={{ background: 'radial-gradient(circle, #D19701 0%, transparent 70%)' }}
           ></div>
           <div
-            className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full blur-3xl"
-            style={{ backgroundColor: "var(--color-primary)" }}
+            className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full blur-3xl opacity-5"
+            style={{ background: 'radial-gradient(circle, #B67E00 0%, transparent 70%)' }}
           ></div>
 
-          {/* Gym icons pattern */}
-          <div className="absolute top-10 left-10">
-            <span className="text-4xl">🏋️</span>
-          </div>
-          <div className="absolute bottom-10 right-10">
-            <span className="text-4xl">💪</span>
-          </div>
+          {/* Decorative gold circles */}
+          <div className="absolute top-10 left-10 w-20 h-20 border border-[#D19701]/10 rounded-full"></div>
+          <div className="absolute bottom-10 right-10 w-32 h-32 border border-[#D19701]/10 rounded-full"></div>
+          <div className="absolute top-1/2 right-20 w-10 h-10 border border-[#D19701]/10 rounded-full"></div>
+          
+          {/* Fashion icons */}
+          <div className="absolute top-10 left-10 text-4xl opacity-10">👗</div>
+          <div className="absolute bottom-10 right-10 text-4xl opacity-10">👠</div>
         </div>
 
         <div className="max-w-md w-full relative z-10">
-          {/* Back button */}
+          {/* Back button - Gold Theme */}
           <button
             onClick={() => navigate("/")}
-            className="mb-6 flex items-center space-x-2 transition-colors group text-muted hover:text-primary"
+            className="mb-6 flex items-center space-x-2 transition-colors group text-[#666666] hover:text-[#D19701]"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Back to Home</span>
           </button>
 
-          {/* Register Card */}
-          <div className="rounded-2xl shadow-2xl p-8 bg-card border border-theme">
+          {/* Register Card - Gold Theme */}
+          <div className="rounded-2xl shadow-2xl p-8 bg-white border border-[#EFE7C8]">
             {/* Logo and Title */}
             <div className="text-center mb-8">
               <div className="flex justify-center mb-4">
-                <div className="p-3 rounded-2xl shadow-lg bg-main border-2 border-theme">
+                <div className="p-3 rounded-2xl shadow-lg bg-[#FDFBD4] border-2 border-[#EFE7C8]">
                   <img
-                    src={`${STORAGE_URL}/${contactData.site_web_logo}`}
-                    alt={contactData?.site_name || "One Rep More"}
-                    className="h-16 w-16 object-contain rounded-full"
+                    src="/image/logo.png"
+                    alt="APSARA"
+                    className="h-20 w-auto object-contain"
                   />
                 </div>
               </div>
-              <h2 className="text-3xl font-bold mb-2 text-primary">
-                Join <span className="text-brand">One Rep More</span>
+              <h2 className="font-heading text-3xl font-bold" style={{ color: '#D19701' }}>
+                Join APSARA
               </h2>
-              <p className="text-muted">
-                Create your account and start building your dream gym
+              <p className="text-[#666666] text-sm mt-1">
+                Create your account and start exploring luxury fashion
               </p>
             </div>
 
@@ -273,16 +269,16 @@ const RegisterPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Enter your full name"
-                  borderColor={
-                    errors.name ? "var(--color-primary)" : "var(--bg-border)"
-                  }
-                  focusColor="var(--color-primary)"
+                  borderColor={errors.name ? "#D19701" : "#EFE7C8"}
+                  focusColor="#D19701"
                   icon={User}
                   className="bg-transparent"
+                  labelClassName="text-[#111111] font-medium"
+                  inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
                 />
                 {errors.name && (
-                  <p className="mt-2 text-sm flex items-center text-brand">
-                    <span className="inline-block w-1 h-1 rounded-full mr-2 bg-brand"></span>
+                  <p className="mt-2 text-sm flex items-center" style={{ color: '#B67E00' }}>
+                    <span className="inline-block w-1 h-1 rounded-full mr-2" style={{ background: '#D19701' }}></span>
                     {errors.name}
                   </p>
                 )}
@@ -298,16 +294,16 @@ const RegisterPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
-                  borderColor={
-                    errors.email ? "var(--color-primary)" : "var(--bg-border)"
-                  }
-                  focusColor="var(--color-primary)"
+                  borderColor={errors.email ? "#D19701" : "#EFE7C8"}
+                  focusColor="#D19701"
                   icon={Mail}
                   className="bg-transparent"
+                  labelClassName="text-[#111111] font-medium"
+                  inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
                 />
                 {errors.email && (
-                  <p className="mt-2 text-sm flex items-center text-brand">
-                    <span className="inline-block w-1 h-1 rounded-full mr-2 bg-brand"></span>
+                  <p className="mt-2 text-sm flex items-center" style={{ color: '#B67E00' }}>
+                    <span className="inline-block w-1 h-1 rounded-full mr-2" style={{ background: '#D19701' }}></span>
                     {errors.email}
                   </p>
                 )}
@@ -323,16 +319,16 @@ const RegisterPage = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="Enter 10-digit phone number"
-                  borderColor={
-                    errors.phone ? "var(--color-primary)" : "var(--bg-border)"
-                  }
-                  focusColor="var(--color-primary)"
+                  borderColor={errors.phone ? "#D19701" : "#EFE7C8"}
+                  focusColor="#D19701"
                   icon={Phone}
                   className="bg-transparent"
+                  labelClassName="text-[#111111] font-medium"
+                  inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
                 />
                 {errors.phone && (
-                  <p className="mt-2 text-sm flex items-center text-brand">
-                    <span className="inline-block w-1 h-1 rounded-full mr-2 bg-brand"></span>
+                  <p className="mt-2 text-sm flex items-center" style={{ color: '#B67E00' }}>
+                    <span className="inline-block w-1 h-1 rounded-full mr-2" style={{ background: '#D19701' }}></span>
                     {errors.phone}
                   </p>
                 )}
@@ -348,37 +344,33 @@ const RegisterPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Create a strong password"
-                  borderColor={
-                    errors.password
-                      ? "var(--color-primary)"
-                      : "var(--bg-border)"
-                  }
-                  focusColor="var(--color-primary)"
+                  borderColor={errors.password ? "#D19701" : "#EFE7C8"}
+                  focusColor="#D19701"
                   icon={Lock}
                   className="bg-transparent"
+                  labelClassName="text-[#111111] font-medium"
+                  inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
                 />
 
-                {/* Password Strength Indicator */}
+                {/* Password Strength Indicator - Gold Theme */}
                 {formData.password && (
                   <div className="mt-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <div
                         className="flex-1 h-2 rounded-full overflow-hidden"
-                        style={{
-                          backgroundColor: "var(--color-primary-light)",
-                        }}
+                        style={{ backgroundColor: '#FDFBD4' }}
                       >
                         <div
                           className="h-full rounded-full transition-all duration-300"
                           style={{
                             width: `${(passwordStrength.strength / 5) * 100}%`,
-                            backgroundColor: passwordStrength.color,
+                            backgroundColor: passwordStrength.color || '#D19701',
                           }}
                         ></div>
                       </div>
                       <span
                         className="text-xs font-medium ml-2"
-                        style={{ color: passwordStrength.color }}
+                        style={{ color: passwordStrength.color || '#D19701' }}
                       >
                         {passwordStrength.label}
                       </span>
@@ -390,19 +382,17 @@ const RegisterPage = () => {
                         <div key={index} className="flex items-center gap-2">
                           <div
                             className={`w-4 h-4 rounded flex items-center justify-center ${
-                              req.met ? "bg-success" : "bg-border"
+                              req.met ? "bg-[#D19701]" : "bg-[#EFE7C8]"
                             }`}
                           >
                             {req.met && (
-                              <Check size={10} className="text-primary" />
+                              <Check size={10} className="text-[#5A3A00]" />
                             )}
                           </div>
                           <span
                             className="text-xs"
                             style={{
-                              color: req.met
-                                ? "var(--color-success)"
-                                : "var(--text-muted)",
+                              color: req.met ? '#5BAE3B' : '#999999',
                             }}
                           >
                             {req.label}
@@ -414,8 +404,8 @@ const RegisterPage = () => {
                 )}
 
                 {errors.password && (
-                  <p className="mt-2 text-sm flex items-center text-brand">
-                    <span className="inline-block w-1 h-1 rounded-full mr-2 bg-brand"></span>
+                  <p className="mt-2 text-sm flex items-center" style={{ color: '#B67E00' }}>
+                    <span className="inline-block w-1 h-1 rounded-full mr-2" style={{ background: '#D19701' }}></span>
                     {errors.password}
                   </p>
                 )}
@@ -431,24 +421,22 @@ const RegisterPage = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Re-enter your password"
-                  borderColor={
-                    errors.confirmPassword
-                      ? "var(--color-primary)"
-                      : "var(--bg-border)"
-                  }
-                  focusColor="var(--color-primary)"
+                  borderColor={errors.confirmPassword ? "#D19701" : "#EFE7C8"}
+                  focusColor="#D19701"
                   icon={Lock}
                   className="bg-transparent"
+                  labelClassName="text-[#111111] font-medium"
+                  inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
                 />
                 {errors.confirmPassword && (
-                  <p className="mt-2 text-sm flex items-center text-brand">
-                    <span className="inline-block w-1 h-1 rounded-full mr-2 bg-brand"></span>
+                  <p className="mt-2 text-sm flex items-center" style={{ color: '#B67E00' }}>
+                    <span className="inline-block w-1 h-1 rounded-full mr-2" style={{ background: '#D19701' }}></span>
                     {errors.confirmPassword}
                   </p>
                 )}
               </div>
 
-              {/* Terms Agreement */}
+              {/* Terms Agreement - Gold Theme */}
               <div className="pt-2">
                 <div className="flex items-start gap-3">
                   <input
@@ -458,50 +446,59 @@ const RegisterPage = () => {
                     onChange={(e) => setAgreedToTerms(e.target.checked)}
                     className="w-4 h-4 mt-1 rounded cursor-pointer focus:ring-2 focus:ring-offset-0"
                     style={{
-                      backgroundColor: agreedToTerms
-                        ? "var(--color-primary)"
-                        : "var(--bg-card)",
-                      border: "1px solid var(--bg-border)",
-                      color: "var(--color-primary)",
+                      backgroundColor: agreedToTerms ? '#D19701' : '#FFFFFF',
+                      border: '1px solid #EFE7C8',
+                      color: '#D19701',
                     }}
                   />
                   <label
                     htmlFor="terms"
-                    className="text-sm cursor-pointer text-muted"
+                    className="text-sm cursor-pointer text-[#666666]"
                   >
                     I agree to the{" "}
                     <Link
                       to="/terms"
-                      className="font-semibold hover:text-primary transition-colors text-brand"
+                      className="font-semibold transition-colors"
+                      style={{ color: '#D19701' }}
+                      onMouseEnter={(e) => e.target.style.color = '#B67E00'}
+                      onMouseLeave={(e) => e.target.style.color = '#D19701'}
                     >
                       Terms of Service
                     </Link>{" "}
                     and{" "}
                     <Link
                       to="/privacy"
-                      className="font-semibold hover:text-primary transition-colors text-brand"
+                      className="font-semibold transition-colors"
+                      style={{ color: '#D19701' }}
+                      onMouseEnter={(e) => e.target.style.color = '#B67E00'}
+                      onMouseLeave={(e) => e.target.style.color = '#D19701'}
                     >
                       Privacy Policy
                     </Link>
                   </label>
                 </div>
                 {errors.terms && (
-                  <p className="mt-2 text-sm flex items-center text-brand">
-                    <span className="inline-block w-1 h-1 rounded-full mr-2 bg-brand"></span>
+                  <p className="mt-2 text-sm flex items-center" style={{ color: '#B67E00' }}>
+                    <span className="inline-block w-1 h-1 rounded-full mr-2" style={{ background: '#D19701' }}></span>
                     {errors.terms}
                   </p>
                 )}
               </div>
 
-              {/* Submit Button */}
+              {/* Submit Button - Gold Theme */}
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center items-center space-x-2 py-3 px-4 rounded-lg shadow-lg text-primary font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-primary-hover hover:scale-[1.02] active:scale-[0.98] mt-6 bg-gradient-primary"
+                className="w-full flex justify-center items-center space-x-2 py-3 px-4 rounded-[14px] font-heading font-semibold text-[#5A3A00] text-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] mt-6"
+                style={{
+                  background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                  border: '1px solid #C38A00',
+                  boxShadow: '0 10px 25px rgba(209,151,1,0.35)',
+                }}
               >
                 {isLoading ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2" style={{ borderColor: '#5A3A00' }}></div>
                     <span>Creating Account...</span>
                   </>
                 ) : (
@@ -513,24 +510,25 @@ const RegisterPage = () => {
               </button>
             </form>
 
-            {/* Divider */}
+            {/* Divider - Gold Theme */}
             <div className="mt-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-theme"></div>
+                  <div className="w-full border-t border-[#EFE7C8]"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-card text-muted">
+                  <span className="px-2 bg-white text-[#666666]">
                     Already have an account?
                   </span>
                 </div>
               </div>
 
-              {/* Sign In Link */}
+              {/* Sign In Link - Gold Theme */}
               <div className="mt-4 text-center">
                 <Link
                   to="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:gap-4 border border-theme text-primary hover:border-brand hover:bg-brand/10"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-[14px] font-semibold transition-all duration-300 hover:gap-4 border border-[#EFE7C8] hover:border-[#D19701] hover:bg-[#FDFBD4]"
+                  style={{ color: '#D19701' }}
                 >
                   Sign In to Existing Account
                   <ArrowLeft size={18} className="rotate-180" />
@@ -540,6 +538,13 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .font-heading {
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+        }
+      `}</style>
     </>
   );
 };

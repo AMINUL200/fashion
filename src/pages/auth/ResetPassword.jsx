@@ -77,7 +77,6 @@ const ResetPassword = () => {
     setIsLoading(true);
     
     try {
-      // API 1: Send OTP
       const response = await api.post("/forgot-password", { email: formData.email });
       
       if (response.data?.success) {
@@ -102,7 +101,6 @@ const ResetPassword = () => {
     setIsLoading(true);
     
     try {
-      // API 2: Reset password with all data
       const response = await api.post("/reset-password", formData);
       
       if (response.data?.success) {
@@ -147,10 +145,10 @@ const ResetPassword = () => {
       case 1:
         return (
           <>
-            <h2 className="text-3xl font-bold mb-2 text-primary">
+            <h2 className="font-heading text-3xl font-bold mb-2" style={{ color: '#D19701' }}>
               Reset Your Password
             </h2>
-            <p className="mb-6 text-muted">
+            <p className="mb-6 text-[#666666]">
               Enter your email address to receive a verification code
             </p>
             
@@ -162,25 +160,30 @@ const ResetPassword = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                borderColor={errors.email ? 'var(--color-primary)' : 'var(--bg-border)'}
-                focusColor="var(--color-primary)"
+                borderColor={errors.email ? '#D19701' : '#EFE7C8'}
+                focusColor="#D19701"
                 className="bg-transparent"
+                labelClassName="text-[#111111] font-medium"
+                inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
               />
               {errors.email && (
-                <p className="mt-2 text-sm text-brand">{errors.email}</p>
+                <p className="mt-2 text-sm" style={{ color: '#B67E00' }}>{errors.email}</p>
               )}
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex justify-center items-center gap-2 py-3 rounded-lg text-primary font-semibold text-lg
-                transition-all duration-300 hover:shadow-primary-hover hover:scale-[1.02] active:scale-[0.98]
-                disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary"
+              className="w-full flex justify-center items-center gap-2 py-3 rounded-[14px] font-heading font-semibold text-[#5A3A00] text-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                border: '1px solid #C38A00',
+                boxShadow: '0 10px 25px rgba(209,151,1,0.35)',
+              }}
             >
               {isLoading ? (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2" style={{ borderColor: '#5A3A00' }}></div>
                   Sending OTP...
                 </>
               ) : (
@@ -196,23 +199,24 @@ const ResetPassword = () => {
       case 2:
         return (
           <>
-            <h2 className="text-3xl font-bold mb-2 text-primary">
+            <h2 className="font-heading text-3xl font-bold mb-2" style={{ color: '#D19701' }}>
               Reset Password
             </h2>
-            <p className="mb-6 text-muted">
-              Enter the OTP sent to <span className="text-brand">{formData.email}</span> and your new password
+            <p className="mb-6 text-[#666666]">
+              Enter the OTP sent to <span style={{ color: '#D19701' }}>{formData.email}</span> and your new password
             </p>
             
             <div className="space-y-6">
               {/* OTP */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-sm font-medium text-primary">6-Digit OTP</label>
+                  <label className="text-sm font-medium text-[#111111]">6-Digit OTP</label>
                   <button
                     type="button"
                     onClick={resendOTP}
                     disabled={isLoading}
-                    className="text-sm font-semibold hover:opacity-80 transition-opacity disabled:opacity-50 text-brand"
+                    className="text-sm font-semibold hover:opacity-80 transition-opacity disabled:opacity-50"
+                    style={{ color: '#D19701' }}
                   >
                     Resend OTP
                   </button>
@@ -224,12 +228,13 @@ const ResetPassword = () => {
                   onChange={handleChange}
                   placeholder="Enter 6-digit code"
                   maxLength="6"
-                  borderColor={errors.otp ? 'var(--color-primary)' : 'var(--bg-border)'}
-                  focusColor="var(--color-primary)"
+                  borderColor={errors.otp ? '#D19701' : '#EFE7C8'}
+                  focusColor="#D19701"
                   className="bg-transparent"
+                  inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
                 />
                 {errors.otp && (
-                  <p className="mt-2 text-sm text-brand">{errors.otp}</p>
+                  <p className="mt-2 text-sm" style={{ color: '#B67E00' }}>{errors.otp}</p>
                 )}
               </div>
 
@@ -243,14 +248,17 @@ const ResetPassword = () => {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="Enter new password"
-                    borderColor={errors.password ? 'var(--color-primary)' : 'var(--bg-border)'}
-                    focusColor="var(--color-primary)"
+                    borderColor={errors.password ? '#D19701' : '#EFE7C8'}
+                    focusColor="#D19701"
                     className="bg-transparent"
+                    labelClassName="text-[#111111] font-medium"
+                    inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:opacity-80 transition-opacity text-muted"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:opacity-80 transition-opacity"
+                    style={{ color: '#999999' }}
                   >
                     {showPassword ? (
                       <EyeOff className="w-5 h-5" />
@@ -260,7 +268,7 @@ const ResetPassword = () => {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="mt-2 text-sm text-brand">{errors.password}</p>
+                  <p className="mt-2 text-sm" style={{ color: '#B67E00' }}>{errors.password}</p>
                 )}
               </div>
 
@@ -274,14 +282,17 @@ const ResetPassword = () => {
                     value={formData.password_confirmation}
                     onChange={handleChange}
                     placeholder="Confirm new password"
-                    borderColor={errors.password_confirmation ? 'var(--color-primary)' : 'var(--bg-border)'}
-                    focusColor="var(--color-primary)"
+                    borderColor={errors.password_confirmation ? '#D19701' : '#EFE7C8'}
+                    focusColor="#D19701"
                     className="bg-transparent"
+                    labelClassName="text-[#111111] font-medium"
+                    inputClassName="bg-[#FDFBD4] border-[#EFE7C8] focus:border-[#D19701] focus:ring-2 focus:ring-[#D19701]/20 rounded-[14px] text-[#111111] placeholder:text-[#999999]"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:opacity-80 transition-opacity text-muted"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:opacity-80 transition-opacity"
+                    style={{ color: '#999999' }}
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="w-5 h-5" />
@@ -291,41 +302,44 @@ const ResetPassword = () => {
                   </button>
                 </div>
                 {errors.password_confirmation && (
-                  <p className="mt-2 text-sm text-brand">{errors.password_confirmation}</p>
+                  <p className="mt-2 text-sm" style={{ color: '#B67E00' }}>{errors.password_confirmation}</p>
                 )}
               </div>
 
-              <div className="text-sm text-muted">
-                <p className="flex items-center gap-2 mb-1">
-                  <CheckCircle className="w-4 h-4 text-success" />
+              <div className="text-sm">
+                <p className="flex items-center gap-2 mb-1" style={{ color: '#666666' }}>
+                  <CheckCircle className="w-4 h-4" style={{ color: '#5BAE3B' }} />
                   Password must be at least 6 characters
                 </p>
-                <p className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-success" />
+                <p className="flex items-center gap-2" style={{ color: '#666666' }}>
+                  <CheckCircle className="w-4 h-4" style={{ color: '#5BAE3B' }} />
                   Both passwords must match
                 </p>
               </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 mt-6">
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-300
-                  hover:bg-white/5 active:scale-[0.98] border border-theme text-primary bg-card"
+                className="flex-1 px-6 py-3 rounded-[14px] font-semibold transition-all duration-300 active:scale-[0.98] border border-[#EFE7C8] hover:border-[#D19701] hover:bg-[#FDFBD4]"
+                style={{ color: '#D19701' }}
               >
                 Back
               </button>
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex-1 flex justify-center items-center gap-2 py-3 rounded-lg text-primary font-semibold text-lg
-                  transition-all duration-300 hover:shadow-primary-hover hover:scale-[1.02] active:scale-[0.98]
-                  disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary"
+                className="flex-1 flex justify-center items-center gap-2 py-3 rounded-[14px] font-heading font-semibold text-[#5A3A00] text-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                  border: '1px solid #C38A00',
+                  boxShadow: '0 10px 25px rgba(209,151,1,0.35)',
+                }}
               >
                 {isLoading ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2" style={{ borderColor: '#5A3A00' }}></div>
                     Resetting...
                   </>
                 ) : (
@@ -362,65 +376,77 @@ const ResetPassword = () => {
 
   return (
     <>
-      <PageHelmet title="Reset Password - ONE REP MORE" />
-      <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-main">
-        {/* Background decoration - similar to LoginPage */}
+      <PageHelmet title="Reset Password - APSARA" />
+      <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#FFFFFF]">
+        {/* Background decoration - Gold Theme */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div 
             className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl opacity-10"
-            style={{ backgroundColor: 'var(--color-primary)' }}
+            style={{ background: 'radial-gradient(circle, #D19701 0%, transparent 70%)' }}
           ></div>
           <div 
             className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full blur-3xl opacity-5"
-            style={{ backgroundColor: 'var(--color-primary)' }}
+            style={{ background: 'radial-gradient(circle, #B67E00 0%, transparent 70%)' }}
           ></div>
+          
+          {/* Decorative gold circles */}
+          <div className="absolute top-10 right-20 w-16 h-16 border border-[#D19701]/10 rounded-full"></div>
+          <div className="absolute bottom-10 left-20 w-24 h-24 border border-[#D19701]/10 rounded-full"></div>
+          <div className="absolute top-1/2 left-10 w-8 h-8 border border-[#D19701]/10 rounded-full"></div>
         </div>
 
         <div className="max-w-md w-full relative z-10">
-          {/* Back button */}
+          {/* Back button - Gold Theme */}
           <button
             onClick={() => navigate("/login")}
-            className="mb-6 flex items-center space-x-2 transition-colors group text-muted hover:text-primary"
+            className="mb-6 flex items-center space-x-2 transition-colors group text-[#666666] hover:text-[#D19701]"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Back to Login</span>
           </button>
 
-          {/* Reset Password Card */}
-          <div className="rounded-2xl shadow-2xl p-8 bg-card border border-theme">
+          {/* Reset Password Card - Gold Theme */}
+          <div className="rounded-2xl shadow-2xl p-8 bg-white border border-[#EFE7C8]">
             {/* Logo */}
             <div className="flex justify-center mb-6">
-              <div className="p-3 rounded-2xl shadow-lg bg-main border-2 border-theme">
-                <Key className="w-8 h-8 text-brand" />
+              <div className="p-3 rounded-2xl shadow-lg bg-[#FDFBD4] border-2 border-[#EFE7C8]">
+                <img
+                  src="/image/logo.png"
+                  alt="APSARA"
+                  className="h-12 w-auto object-contain"
+                />
               </div>
             </div>
 
-            {/* Progress Steps */}
+            {/* Progress Steps - Gold Theme */}
             <div className="flex justify-between items-center mb-8">
               {steps.map((stepItem, index) => (
                 <React.Fragment key={stepItem.number}>
                   <div className="flex flex-col items-center">
                     <div 
-                      className={`w-10 h-10 rounded-full flex items-center justify-center border-2 font-semibold
+                      className={`w-10 h-10 rounded-full flex items-center justify-center border-2 font-heading font-semibold
                         ${step >= stepItem.number 
-                          ? 'text-primary' 
-                          : 'text-muted'
+                          ? 'text-[#5A3A00]' 
+                          : 'text-[#999999]'
                         }`}
                       style={{
-                        backgroundColor: step >= stepItem.number ? 'var(--color-primary)' : 'transparent',
-                        borderColor: step >= stepItem.number ? 'var(--color-primary)' : 'var(--bg-border)',
+                        backgroundColor: step >= stepItem.number ? 'transparent' : 'transparent',
+                        borderColor: step >= stepItem.number ? '#D19701' : '#EFE7C8',
+                        background: step > stepItem.number ? 'linear-gradient(90deg, #B67E00, #D19701)' : 'transparent',
                       }}
                     >
                       {step > stepItem.number ? (
-                        <CheckCircle className="w-5 h-5" />
+                        <CheckCircle className="w-5 h-5 text-white" />
                       ) : (
-                        stepItem.number
+                        <span style={{ color: step >= stepItem.number ? '#D19701' : '#999999' }}>
+                          {stepItem.number}
+                        </span>
                       )}
                     </div>
                     <span 
                       className={`text-xs mt-2 font-medium`}
                       style={{ 
-                        color: step >= stepItem.number ? 'var(--color-primary)' : 'var(--text-muted)'
+                        color: step >= stepItem.number ? '#D19701' : '#999999'
                       }}
                     >
                       {stepItem.label}
@@ -431,7 +457,7 @@ const ResetPassword = () => {
                     <div 
                       className="flex-1 h-1 mx-2 rounded-full"
                       style={{ 
-                        backgroundColor: step > stepItem.number ? 'var(--color-primary)' : 'var(--bg-border)'
+                        backgroundColor: step > stepItem.number ? '#D19701' : '#EFE7C8'
                       }}
                     />
                   )}
@@ -444,16 +470,23 @@ const ResetPassword = () => {
               {renderStepContent()}
             </form>
 
-            {/* Security Note */}
-            <div className="mt-6 p-3 rounded-lg flex items-start gap-2 bg-success  border border-success">
-              <CheckCircle size={16} className="text-success mt-0.5 flex-shrink-0" />
-              <p className="text-xs text-success">
+            {/* Security Note - Gold Theme */}
+            <div className="mt-6 p-3 rounded-[14px] flex items-start gap-2 border border-[#D19701]/30" style={{ background: '#FDFBD4' }}>
+              <CheckCircle size={16} className="text-[#D19701] mt-0.5 flex-shrink-0" />
+              <p className="text-xs" style={{ color: '#5A3A00' }}>
                 Your password reset process is secure and encrypted.
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .font-heading {
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+        }
+      `}</style>
     </>
   );
 };
