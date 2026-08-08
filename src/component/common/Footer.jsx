@@ -149,7 +149,7 @@ const Footer = ({ contactData }) => {
                 <div className="flex flex-col items-start gap-4 mb-4">
                   <div className="w-28 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-[#FAFAFA] border border-[#E5E7EB] p-2">
                     <img
-                      src="/image/logo2.jpeg"
+                      src="/image/logo2.png"
                       alt={contactData?.site_logo_alt || "ONE REP MORE Logo"}
                       className="w-full h-full object-fill"
                       onError={(e) => {

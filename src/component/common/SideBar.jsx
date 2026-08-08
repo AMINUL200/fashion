@@ -19,6 +19,50 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  /* ================= MEGA MENU DATA (Same as Navbar) ================= */
+  const megaMenuData = {
+    men: {
+      title: "MEN",
+      categories: [
+        "T-Shirts",
+        "Shirts",
+        "Jeans",
+        "Pants",
+        "Shorts",
+        "Hoodies",
+        "Jackets",
+        "Blazers",
+        "Ethnic Wear",
+        "Innerwear",
+        "Accessories",
+      ],
+    },
+    women: {
+      title: "WOMEN",
+      categories: [
+        "Dresses",
+        "Tops",
+        "T-Shirts",
+        "Jeans",
+        "Pants",
+        "Skirts",
+        "Kurtis",
+        "Sarees",
+        "Hoodies",
+        "Jackets",
+        "Accessories",
+      ],
+    },
+    kids: {
+      title: "KIDS",
+      categories: ["Boys", "Girls", "Baby"],
+    },
+    featured: {
+      title: "FEATURED",
+      categories: ["New Arrivals", "Best Sellers", "Trending", "Sale"],
+    },
+  };
+
   /* ================= ICON MAPPING FOR CATEGORIES ================= */
   const getCategoryIcon = (categoryName) => {
     const name = categoryName?.toLowerCase() || "";
@@ -32,11 +76,13 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
     if (name.includes("accessor")) return "🧤";
     if (name.includes("blazer") || name.includes("suit")) return "🤵";
     if (name.includes("ethnic") || name.includes("wear")) return "👳";
+    if (name.includes("boys") || name.includes("girls")) return "👶";
+    if (name.includes("baby")) return "🍼";
 
     return "👔"; // Default icon
   };
 
-  /* ================= SIDEBAR LINKS MATCHING NAVBAR ================= */
+  /* ================= SIDEBAR LINKS WITH MEGA MENU DROPDOWN ================= */
   const sidebarLinks = [
     {
       id: "home",
@@ -45,24 +91,55 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
       icon: <Home className="w-5 h-5" />,
     },
     {
-      id: "products",
+      id: "shop",
       label: "Shop",
       icon: <Package className="w-5 h-5" />,
-      dropdown:
-        categoryData && categoryData.length > 0
-          ? categoryData.map((category) => ({
-              id: category.id,
-              label: category.name,
-              path: `/products/${category.slug}`,
-              icon: getCategoryIcon(category.name),
-              image: category.image,
-            }))
-          : [
-              { id: "men", label: "Men", path: "/products/men" },
-              { id: "women", label: "Women", path: "/products/women" },
-              { id: "kids", label: "Kids", path: "/products/kids" },
-              { id: "accessories", label: "Accessories", path: "/products/accessories" },
-            ],
+      dropdown: [
+        {
+          id: "men",
+          label: "MEN",
+          icon: "👨",
+          dropdown: megaMenuData.men.categories.map((cat) => ({
+            id: cat.toLowerCase().replace(/\s+/g, '-'),
+            label: cat,
+            path: `/products/${cat.toLowerCase()}`,
+            icon: getCategoryIcon(cat),
+          })),
+        },
+        {
+          id: "women",
+          label: "WOMEN",
+          icon: "👩",
+          dropdown: megaMenuData.women.categories.map((cat) => ({
+            id: cat.toLowerCase().replace(/\s+/g, '-'),
+            label: cat,
+            path: `/products/${cat.toLowerCase()}`,
+            icon: getCategoryIcon(cat),
+          })),
+        },
+        {
+          id: "kids",
+          label: "KIDS",
+          icon: "👶",
+          dropdown: megaMenuData.kids.categories.map((cat) => ({
+            id: cat.toLowerCase().replace(/\s+/g, '-'),
+            label: cat,
+            path: `/products/${cat.toLowerCase()}`,
+            icon: getCategoryIcon(cat),
+          })),
+        },
+        {
+          id: "featured",
+          label: "FEATURED",
+          icon: "⭐",
+          dropdown: megaMenuData.featured.categories.map((cat) => ({
+            id: cat.toLowerCase().replace(/\s+/g, '-'),
+            label: cat,
+            path: `/products/${cat.toLowerCase().replace(/\s+/g, '-')}`,
+            icon: cat === "New Arrivals" ? "🆕" : cat === "Best Sellers" ? "🏆" : cat === "Trending" ? "🔥" : "💎",
+          })),
+        },
+      ],
     },
     {
       id: "new-arrivals",
@@ -126,11 +203,14 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
             level > 1 ? "pl-10" : "pl-6"
           } ${
             active
-              ? "bg-[#182E72] text-white font-semibold"
+              ? "text-[#5A3A00] font-semibold"
               : open
-                ? "bg-[#E9EEFF] text-[#182E72]"
-                : "text-[#6B7280] hover:bg-[#FAFAFA] hover:text-[#182E72]"
+                ? "bg-[#FDFBD4] text-[#D19701]"
+                : "text-[#666666] hover:bg-[#FDFBD4] hover:text-[#D19701]"
           }`}
+          style={{
+            background: active ? 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)' : open ? '#FDFBD4' : 'transparent'
+          }}
         >
           <div className="flex items-center gap-2">
             {item.icon && <span className="text-base">{item.icon}</span>}
@@ -148,10 +228,10 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
         {hasSub && (
           <div
             className={`overflow-hidden transition-all ${
-              open ? "max-h-96" : "max-h-0"
+              open ? "max-h-[800px]" : "max-h-0"
             }`}
           >
-            <div className="border-l border-[#E5E7EB] ml-4">
+            <div className="border-l border-[#EFE7C8] ml-4">
               {item.dropdown.map((sub) => renderDropdownItem(sub, level + 1))}
             </div>
           </div>
@@ -172,11 +252,19 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
           }
           className={`flex items-center justify-between px-4 py-3 mx-2 rounded-lg cursor-pointer transition ${
             active
-              ? "bg-[#182E72] text-white font-semibold"
+              ? "text-[#5A3A00] font-semibold"
               : open
-                ? "bg-[#E9EEFF] text-[#182E72]"
-                : "text-[#6B7280] hover:bg-[#FAFAFA] hover:text-[#182E72]"
+                ? "bg-[#FDFBD4] text-[#D19701]"
+                : "text-[#666666] hover:bg-[#FDFBD4] hover:text-[#D19701]"
           }`}
+          style={{
+            background: active 
+              ? 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)' 
+              : open 
+                ? '#FDFBD4' 
+                : 'transparent',
+            boxShadow: active ? '0 8px 20px rgba(209,151,1,0.25)' : 'none'
+          }}
         >
           <div className="flex items-center gap-3">
             {item.icon}
@@ -194,22 +282,12 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
         {item.dropdown && item.dropdown.length > 0 && (
           <div
             className={`overflow-hidden transition-all ${
-              open ? "max-h-[800px]" : "max-h-0"
+              open ? "max-h-[1200px]" : "max-h-0"
             }`}
           >
             {item.dropdown.map((d) => renderDropdownItem(d))}
           </div>
         )}
-
-        {/* Show message if products dropdown is empty */}
-        {item.id === "products" &&
-          item.dropdown &&
-          item.dropdown.length === 0 &&
-          open && (
-            <div className="px-4 py-3 ml-8 text-sm text-[#6B7280] italic">
-              No categories available
-            </div>
-          )}
       </div>
     );
   };
@@ -224,69 +302,74 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
         onClick={toggleMenu}
       />
 
-      {/* Sidebar */}
+      {/* Sidebar - Gold Theme */}
       <aside
         className={`fixed top-0 right-0 h-full w-80 bg-white z-50 transform transition-transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{
           boxShadow: "-4px 0 20px rgba(0, 0, 0, 0.5)",
+          borderLeft: "1px solid #EFE7C8",
         }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-[#E5E7EB] bg-[#FAFAFA]">
-          <h2 className="text-xl font-bold font-heading">
-            <span className="text-[#182E72]">APSARA </span>
+        {/* Header - Gold Theme */}
+        <div className="flex items-center justify-between p-6 border-b border-[#EFE7C8]" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
+          <h2 className="text-xl font-heading font-bold">
+            <span className="text-[#D19701]">APSARA</span>
           </h2>
           <button
             onClick={toggleMenu}
-            className="p-2 rounded-full hover:bg-[#F8FAFC] transition"
+            className="p-2 rounded-full hover:bg-[#FDFBD4] transition"
           >
-            <X className="text-[#182E72]" size={20} />
+            <X className="text-[#D19701]" size={20} />
           </button>
         </div>
 
-        {/* Category Count Badge (if needed) */}
-        {categoryData && categoryData.length > 0 && (
-          <div className="px-6 py-2 border-b border-[#E5E7EB] bg-white">
-            <span className="text-xs text-[#6B7280]">
-              {categoryData.length} Categories Available
-            </span>
-          </div>
-        )}
+        {/* Category Count Badge - Gold Theme */}
+        <div className="px-6 py-2 border-b border-[#EFE7C8] bg-white">
+          <span className="text-xs text-[#666666]">
+            Shop by Category
+          </span>
+        </div>
 
-        {/* Nav */}
+        {/* Nav - Gold Theme */}
         <nav className="flex-1 overflow-y-auto py-4 max-h-[calc(100vh-180px)] custom-scrollbar">
           {sidebarLinks.map(renderNavItem)}
         </nav>
 
-        {/* Auth Section */}
+        {/* Auth Section - Gold Theme */}
         {!isAuthenticated ? (
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#E5E7EB] bg-[#FAFAFA]">
+          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#EFE7C8]" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
             <button
               onClick={() => {
                 navigate("/login");
                 toggleMenu();
               }}
-              className="w-full bg-[#182E72] text-white py-2 px-4 rounded-lg font-semibold hover:bg-[#2848A0] transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
+              className="w-full font-heading font-semibold py-2.5 px-4 rounded-[14px] transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+              style={{
+                background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                color: '#5A3A00',
+                border: '1px solid #C38A00',
+                boxShadow: '0 8px 20px rgba(209,151,1,0.25)',
+              }}
             >
               Login / Sign Up
             </button>
           </div>
         ) : (
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#E5E7EB] bg-[#FAFAFA]">
+          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#EFE7C8]" style={{ background: 'linear-gradient(90deg, #FFFFFF 0%, #FDFBD4 100%)' }}>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white bg-[#182E72]">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-[#5A3A00]" style={{ background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)' }}>
                 U
               </div>
               <div>
-                <p className="text-[#111827] font-medium">User Name</p>
-                <p className="text-xs text-[#6B7280]">user@example.com</p>
+                <p className="text-[#111111] font-medium">User Name</p>
+                <p className="text-xs text-[#666666]">user@example.com</p>
               </div>
             </div>
             <button
               onClick={handleLogout}
-              className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-[#DC2626] hover:bg-[#DC2626]/10 transition"
+              className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-[14px] text-[#B67E00] hover:bg-[#FDFBD4] transition border border-[#EFE7C8]"
             >
               <LogOut size={18} />
               <span>Logout</span>
@@ -295,7 +378,7 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
         )}
       </aside>
 
-      {/* Custom Scrollbar Styles */}
+      {/* Custom Scrollbar Styles - Gold Theme */}
       <style jsx>{`
         .font-heading {
           font-family: 'Poppins', sans-serif;
@@ -307,21 +390,36 @@ const SideBar = ({ toggleMenu, isOpen, categoryData }) => {
         }
 
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: #F1F5F9;
+          background: #FDFBD4;
         }
 
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #182E72;
+          background: #D19701;
           border-radius: 4px;
         }
 
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #2848A0;
+          background: #B67E00;
         }
 
         .custom-scrollbar {
           scrollbar-width: thin;
-          scrollbar-color: #182E72 #F1F5F9;
+          scrollbar-color: #D19701 #FDFBD4;
+        }
+
+        /* Dropdown item hover effect */
+        .dropdown-item {
+          transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+          padding-left: 2rem;
+        }
+
+        /* Active state with gold gradient */
+        .active-gold {
+          background: linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%);
+          color: #5A3A00;
         }
       `}</style>
     </>
