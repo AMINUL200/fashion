@@ -96,21 +96,21 @@ const Footer = ({ contactData }) => {
     { icon: Youtube, url: "#", label: "YouTube", active: false },
   ].filter((social) => social.active);
 
-  // Contact Info
+  // Contact Info - Updated with your details
   const contactInfo = [
     {
       icon: Phone,
-      text: contactData?.phone || "+91 1800-123-4567",
-      url: `tel:${contactData?.phone?.replace(/\s/g, "") || "+9118001234567"}`,
+      text: "+91 7699367737 / 7980971636",
+      url: "tel:+917699367737",
     },
     {
       icon: Mail,
-      text: contactData?.email || "support@onerepmore.com",
-      url: `mailto:${contactData?.email || "support@onerepmore.com"}`,
+      text: contactData?.email || "support@apsara.com",
+      url: `mailto:${contactData?.email || "support@apsara.com"}`,
     },
     {
       icon: MapPin,
-      text: `${contactData?.street_address || "Mumbai"}, ${contactData?.city || "Maharashtra"} ${contactData?.zip || "400001"}`,
+      text: "Habra NRC Road, Dhanar Chatal, Jadssore Road, North 24 Parganas",
       url: "#",
     },
   ];
@@ -146,27 +146,49 @@ const Footer = ({ contactData }) => {
                 className="mb-6"
               >
                 {/* Logo Section */}
-                <div className="flex flex-col items-start gap-4 mb-4">
+                <div className="flex flex-col items-start gap-3 mb-4">
                   <div className="w-28 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-[#FAFAFA] border border-[#E5E7EB] p-2">
                     <img
-                      src="/image/logo2.png"
-                      alt={contactData?.site_logo_alt || "ONE REP MORE Logo"}
-                      className="w-full h-full object-fill"
+                      src="/image/logo.png"
+                      alt="APSARA Logo"
+                      className="w-full h-full object-contain"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src =
-                          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23182E72'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='14' fill='white' text-anchor='middle' dy='.3em'%3E1RM%3C/text%3E%3C/svg%3E";
+                          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23D19701'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='14' fill='white' text-anchor='middle' dy='.3em'%3EAPSARA%3C/text%3E%3C/svg%3E";
                       }}
                     />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold">
+                    <h2 className="text-2xl font-heading font-bold text-[#D19701]">
                       APSARA
                     </h2>
-                    {/* <p className="text-sm text-[#6B7280] italic tracking-wide">
-                      {contactData?.punch_line ||
-                        "Your Ultimate Fitness Destination"}
-                    </p> */}
+                    <p className="text-sm text-[#666666] italic tracking-wide">
+                      Luxury Women's Fashion
+                    </p>
+                  </div>
+                </div>
+
+                {/* Address Details - Added after logo */}
+                <div className="mt-4 p-4 bg-[#FDFBD4] rounded-xl border border-[#EFE7C8]">
+                  <div className="flex items-start gap-3">
+                    <MapPin size={18} className="text-[#D19701] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm text-[#111111] font-medium">Our Address</p>
+                      <p className="text-xs text-[#666666] leading-relaxed">
+                        Habra NRC Road, Dhanar Chatal, Jadssore Road,<br />
+                        North 24 Parganas, Po+Ps: Habra, Pin: 743263
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 mt-2 pt-2 border-t border-[#EFE7C8]">
+                    <Phone size={18} className="text-[#D19701] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm text-[#111111] font-medium">Contact</p>
+                      <p className="text-xs text-[#666666]">
+                        +91 7699367737 / 7980971636
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -181,12 +203,12 @@ const Footer = ({ contactData }) => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.08 }}
-                    className="flex items-start gap-3 text-[#6B7280] hover:text-[#182E72] transition-colors duration-200 group"
+                    className="flex items-start gap-3 text-[#6B7280] hover:text-[#D19701] transition-colors duration-200 group"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-[#FAFAFA] border border-[#E5E7EB] flex items-center justify-center group-hover:bg-[#E9EEFF] group-hover:border-[#182E72] transition-colors flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-[#FAFAFA] border border-[#EFE7C8] flex items-center justify-center group-hover:bg-[#FDFBD4] group-hover:border-[#D19701] transition-colors flex-shrink-0">
                       <info.icon
                         size={16}
-                        className="text-[#6B7280] group-hover:text-[#182E72] transition-colors"
+                        className="text-[#6B7280] group-hover:text-[#D19701] transition-colors"
                       />
                     </div>
                     <span className="text-sm break-all">{info.text}</span>
@@ -197,7 +219,7 @@ const Footer = ({ contactData }) => {
               {/* Social Links */}
               {socialLinks.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold mb-3 text-[#111827] uppercase tracking-wider">
+                  <h3 className="text-sm font-heading font-semibold mb-3 text-[#111111] uppercase tracking-wider">
                     Follow Us
                   </h3>
                   <div className="flex gap-3">
@@ -211,7 +233,7 @@ const Footer = ({ contactData }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={social.label}
-                        className="w-9 h-9 rounded-lg bg-[#FAFAFA] border border-[#E5E7EB] flex items-center justify-center hover:bg-[#182E72] hover:border-[#182E72] transition-all duration-200"
+                        className="w-9 h-9 rounded-lg bg-[#FAFAFA] border border-[#EFE7C8] flex items-center justify-center hover:bg-[#D19701] hover:border-[#D19701] transition-all duration-200"
                       >
                         <social.icon
                           size={18}
@@ -226,7 +248,7 @@ const Footer = ({ contactData }) => {
 
             {/* Column 2 - Quick Links (Nav Links) */}
             <div>
-              <h3 className="text-sm font-semibold mb-4 text-[#111827] uppercase tracking-wider">
+              <h3 className="text-sm font-heading font-semibold mb-4 text-[#111111] uppercase tracking-wider">
                 Quick Links
               </h3>
               <ul className="space-y-2.5">
@@ -240,9 +262,9 @@ const Footer = ({ contactData }) => {
                   >
                     <a
                       href={link.path}
-                      className="text-[#6B7280] hover:text-[#182E72] transition-all duration-200 flex items-center gap-2 group"
+                      className="text-[#666666] hover:text-[#D19701] transition-all duration-200 flex items-center gap-2 group"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#182E72] opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D19701] opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
                       {link.label}
                     </a>
                   </motion.li>
@@ -252,7 +274,7 @@ const Footer = ({ contactData }) => {
 
             {/* Column 3 - Shop Categories (MEN) */}
             <div>
-              <h3 className="text-sm font-semibold mb-4 text-[#111827] uppercase tracking-wider">
+              <h3 className="text-sm font-heading font-semibold mb-4 text-[#111111] uppercase tracking-wider">
                 {megaMenuData.men.title}
               </h3>
               <ul className="space-y-2.5">
@@ -266,9 +288,9 @@ const Footer = ({ contactData }) => {
                   >
                     <a
                       href={`/products?category=${cat.toLowerCase()}`}
-                      className="text-[#6B7280] hover:text-[#182E72] transition-all duration-200 flex items-center gap-2 group"
+                      className="text-[#666666] hover:text-[#D19701] transition-all duration-200 flex items-center gap-2 group"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#182E72] opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D19701] opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
                       {cat}
                     </a>
                   </motion.li>
@@ -279,7 +301,7 @@ const Footer = ({ contactData }) => {
             {/* Column 4 - Women & Kids */}
             <div>
               <div className="mb-6">
-                <h3 className="text-sm font-semibold mb-4 text-[#111827] uppercase tracking-wider">
+                <h3 className="text-sm font-heading font-semibold mb-4 text-[#111111] uppercase tracking-wider">
                   {megaMenuData.women.title}
                 </h3>
                 <ul className="space-y-2.5">
@@ -293,9 +315,9 @@ const Footer = ({ contactData }) => {
                     >
                       <a
                         href={`/products?category=${cat.toLowerCase()}`}
-                        className="text-[#6B7280] hover:text-[#182E72] transition-all duration-200 flex items-center gap-2 group"
+                        className="text-[#666666] hover:text-[#D19701] transition-all duration-200 flex items-center gap-2 group"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#182E72] opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#D19701] opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
                         {cat}
                       </a>
                     </motion.li>
@@ -304,7 +326,7 @@ const Footer = ({ contactData }) => {
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold mb-4 text-[#111827] uppercase tracking-wider">
+                <h3 className="text-sm font-heading font-semibold mb-4 text-[#111111] uppercase tracking-wider">
                   {megaMenuData.kids.title}
                 </h3>
                 <ul className="space-y-2.5">
@@ -318,9 +340,9 @@ const Footer = ({ contactData }) => {
                     >
                       <a
                         href={`/products?category=${cat.toLowerCase()}`}
-                        className="text-[#6B7280] hover:text-[#182E72] transition-all duration-200 flex items-center gap-2 group"
+                        className="text-[#666666] hover:text-[#D19701] transition-all duration-200 flex items-center gap-2 group"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#182E72] opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#D19701] opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
                         {cat}
                       </a>
                     </motion.li>
@@ -330,8 +352,8 @@ const Footer = ({ contactData }) => {
             </div>
           </div>
 
-          {/* Trust Badges */}
-          <div className="mt-10 pt-6 border-t border-[#E5E7EB]">
+          {/* Trust Badges - Gold Theme */}
+          <div className="mt-10 pt-6 border-t border-[#EFE7C8]">
             <div className="flex flex-wrap justify-center gap-6 md:gap-10">
               {trustBadges.map((badge, index) => (
                 <motion.div
@@ -340,9 +362,9 @@ const Footer = ({ contactData }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-2 text-sm text-[#6B7280]"
+                  className="flex items-center gap-2 text-sm text-[#666666]"
                 >
-                  <badge.icon size={18} className="text-[#182E72]" />
+                  <badge.icon size={18} className="text-[#D19701]" />
                   <span>{badge.text}</span>
                 </motion.div>
               ))}
@@ -355,34 +377,34 @@ const Footer = ({ contactData }) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-8 pt-6 border-t border-[#E5E7EB]"
+            className="mt-8 pt-6 border-t border-[#EFE7C8]"
           >
             {/* Copyright & Links */}
             <div className="flex flex-col items-center gap-3 text-sm">
               <div className="flex flex-wrap justify-center gap-6">
                 <a
                   href="/privacy"
-                  className="text-sm text-[#6B7280] hover:text-[#182E72] transition-colors"
+                  className="text-sm text-[#666666] hover:text-[#D19701] transition-colors"
                 >
                   Privacy Policy
                 </a>
                 <a
                   href="/terms"
-                  className="text-sm text-[#6B7280] hover:text-[#182E72] transition-colors"
+                  className="text-sm text-[#666666] hover:text-[#D19701] transition-colors"
                 >
                   Terms of Service
                 </a>
                 <a
                   href="/sitemap"
-                  className="text-sm text-[#6B7280] hover:text-[#182E72] transition-colors"
+                  className="text-sm text-[#666666] hover:text-[#D19701] transition-colors"
                 >
                   Sitemap
                 </a>
               </div>
-              <p className="text-sm text-[#6B7280] text-center">
+              <p className="text-sm text-[#666666] text-center">
                 © {new Date().getFullYear()}{" "}
-                <span className="text-[#182E72] font-semibold">
-                  {contactData?.site_name || "ONE REP MORE"}
+                <span className="text-[#D19701] font-heading font-semibold">
+                  APSARA
                 </span>
                 . All rights reserved.
               </p>

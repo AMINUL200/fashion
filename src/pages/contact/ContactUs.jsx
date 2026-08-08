@@ -61,7 +61,7 @@ const ContactUs = () => {
     {
       id: 5,
       question: 'How can I contact customer support?',
-      answer: 'You can reach our customer support team via email at support@onerepmore.com, phone at +1 (555) 123-4567, or through our live chat feature available 24/7.'
+      answer: 'You can reach our customer support team via email at support@apsara.com, phone at +91 7699367737, or through our live chat feature available 24/7.'
     }
   ];
 
@@ -96,7 +96,6 @@ const ContactUs = () => {
       return;
     }
     setIsSubmitting(true);
-    // Simulate API call
     setTimeout(() => {
       setSubmitSuccess(true);
       setFormData({ full_name: '', email: '', phone_number: '', subject: '', message: '' });
@@ -111,10 +110,10 @@ const ContactUs = () => {
   };
 
   const contactInfo = [
-    { icon: Phone, title: 'Phone', details: '+1 (555) 123-4567', description: 'Available 24/7' },
-    { icon: Mail, title: 'Email', details: 'support@onerepmore.com', description: 'Response within 24h' },
-    { icon: MapPin, title: 'Location', details: '123 Fitness Street', description: 'Miami, FL 33101' },
-    { icon: Clock, title: 'Hours', details: 'Mon-Fri: 9AM - 8PM', description: 'Sat-Sun: 10AM - 6PM' },
+    { icon: Phone, title: 'Phone', details: '+91 7699367737', description: 'Available 24/7' },
+    { icon: Mail, title: 'Email', details: 'support@apsara.com', description: 'Response within 24h' },
+    { icon: MapPin, title: 'Address', details: 'Habra NRC Road', description: 'North 24 Parganas, West Bengal' },
+    { icon: Clock, title: 'Hours', details: 'Mon-Sat: 10AM - 8PM', description: 'Sunday: Closed' },
   ];
 
   const socialLinks = [
@@ -125,50 +124,48 @@ const ContactUs = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
-      {/* ===== HERO SECTION - Half Screen ===== */}
-      <section className="relative h-[50vh] min-h-[400px] max-h-[600px] overflow-hidden bg-[#0B1120] pt-20">
-        {/* Background Image with Gradient Overlay */}
-        <div className="absolute inset-0">
-          <img
-            src="/contact.avif"
-            alt="Contact Us"
-            className="w-full h-full object-cover opacity-40"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1120] via-[#0B1120]/10 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] to-transparent opacity-60" />
-        </div>
-
+    <div className="min-h-screen bg-[#FFFFFF]">
+      {/* ===== HERO SECTION - Gold Theme ===== */}
+      <section className="relative h-[50vh] min-h-[400px] max-h-[600px] overflow-hidden pt-20" style={{ background: 'linear-gradient(135deg, #B67E00 0%, #D19701 30%, #FFF19C 60%, #D19701 80%, #B67E00 100%)' }}>
         {/* Decorative Elements */}
-        <div className="absolute top-10 right-10 w-32 h-32 rounded-full border border-white/10 animate-pulse" />
-        <div className="absolute bottom-20 left-20 w-24 h-24 rounded-full border border-white/5 animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-10 right-10 w-32 h-32 rounded-full border border-white/20 animate-pulse" />
+          <div className="absolute bottom-20 left-20 w-24 h-24 rounded-full border border-white/10 animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
+          
+          {/* Decorative dots pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full" />
+            <div className="absolute top-1/3 right-1/3 w-2 h-2 bg-white rounded-full" />
+            <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-white rounded-full" />
+            <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-white rounded-full" />
+          </div>
+        </div>
 
         {/* Content */}
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
           <div className="max-w-2xl">
-            
+            <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
+              <span className="text-xs font-semibold uppercase tracking-wider text-white">Contact Us</span>
+            </div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-              Let's Start a{' '} Conversation
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-primary">
-                
-              </span>
+              Let's Start a{' '}
+              <span className="text-[#5A3A00]">Conversation</span>
             </h1>
-            <p className="text-lg text-white/70 max-w-lg leading-relaxed">
-              Have questions about our premium products? Our team is here to help
-              you find the perfect fit for your needs.
+            <p className="text-lg text-white/90 max-w-lg leading-relaxed">
+              Have questions about our premium fashion collection? Our team is here to help
+              you find the perfect style for every occasion.
             </p>
             <div className="flex items-center gap-6 mt-6">
-              <div className="flex items-center gap-2 text-white/50 text-sm">
-                <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
+              <div className="flex items-center gap-2 text-white/80 text-sm">
+                <div className="w-2 h-2 rounded-full bg-[#5A3A00] animate-pulse" />
                 <span>Online now</span>
               </div>
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full border-2 border-[#0B1120] bg-primary-light/20 flex items-center justify-center text-xs text-white"
+                    className="w-8 h-8 rounded-full border-2 border-white/30 bg-white/10 flex items-center justify-center text-xs text-white"
                   >
                     {i}
                   </div>
@@ -178,62 +175,65 @@ const ContactUs = () => {
           </div>
         </div>
 
+        {/* Gold accent line */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FFF19C] to-transparent opacity-50" />
+
         {/* Scroll Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/30">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/50">
           <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <div className="w-5 h-8 rounded-full border-2 border-white/20 flex justify-center">
-            <div className="w-1 h-2 bg-white/40 rounded-full mt-2 animate-bounce" />
+          <div className="w-5 h-8 rounded-full border-2 border-white/30 flex justify-center">
+            <div className="w-1 h-2 bg-white/60 rounded-full mt-2 animate-bounce" />
           </div>
         </div>
       </section>
 
-      {/* ===== CONTACT FORM & INFO SECTION ===== */}
+      {/* ===== CONTACT FORM & INFO SECTION - Gold Theme ===== */}
       <section className="py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Contact Info Cards */}
+          {/* Contact Info Cards - Gold Theme */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12">
             {contactInfo.map((item, index) => (
               <div
                 key={index}
-                className="group p-4 md:p-6 rounded-2xl bg-white border border-[#E5E7EB] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(24,46,114,0.12)] hover:-translate-y-1"
+                className="group p-4 md:p-6 rounded-2xl bg-white border border-[#EFE7C8] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(209,151,1,0.15)] hover:-translate-y-1 hover:border-[#D19701]"
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-3 bg-[#E9EEFF] text-[#182E72] group-hover:scale-110 transition-transform duration-300">
-                  <item.icon size={20} className="md:w-6 md:h-6" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-3 transition-all duration-300 group-hover:scale-110" style={{ background: 'linear-gradient(90deg, #B67E00, #D19701, #FFF19C)' }}>
+                  <item.icon size={20} className="md:w-6 md:h-6 text-[#5A3A00]" />
                 </div>
-                <h4 className="text-xs font-medium text-[#6B7280] uppercase tracking-wider">
+                <h4 className="text-xs font-medium text-[#666666] uppercase tracking-wider">
                   {item.title}
                 </h4>
-                <p className="text-sm md:text-base font-semibold text-[#111827] mt-1">
+                <p className="text-sm md:text-base font-semibold text-[#111111] mt-1">
                   {item.details}
                 </p>
-                <p className="text-xs text-[#9CA3AF] mt-0.5">{item.description}</p>
+                <p className="text-xs text-[#999999] mt-0.5">{item.description}</p>
               </div>
             ))}
           </div>
 
           {/* Form & Map Grid */}
           <div className="grid lg:grid-cols-5 gap-8">
-            {/* Form - 3 columns */}
+            {/* Form - 3 columns - Gold Theme */}
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-2xl border border-[#E5E7EB] p-6 md:p-8">
+              <div className="bg-white rounded-2xl border border-[#EFE7C8] p-6 md:p-8 shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-[#E9EEFF]">
-                    <MessageSquare size={22} className="text-[#182E72]" />
+                  <div className="p-2 rounded-lg" style={{ background: 'linear-gradient(90deg, #B67E00, #D19701, #FFF19C)' }}>
+                    <MessageSquare size={22} className="text-[#5A3A00]" />
                   </div>
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-[#111827]">
+                    <h2 className="font-heading text-xl md:text-2xl font-bold text-[#111111]">
                       Send us a Message
                     </h2>
-                    <p className="text-sm text-[#6B7280]">
+                    <p className="text-sm text-[#666666]">
                       We'll get back to you within 24 hours
                     </p>
                   </div>
                 </div>
 
                 {submitSuccess && (
-                  <div className="mb-6 p-4 rounded-xl bg-[#16A34A]/10 border border-[#16A34A]/30 flex items-center gap-3">
-                    <CheckCircle size={20} className="text-[#16A34A] flex-shrink-0" />
-                    <p className="font-medium text-[#16A34A]">
+                  <div className="mb-6 p-4 rounded-xl bg-[#D19701]/10 border border-[#D19701]/30 flex items-center gap-3">
+                    <CheckCircle size={20} className="text-[#D19701] flex-shrink-0" />
+                    <p className="font-medium text-[#5A3A00]">
                       Message sent successfully! Our team will contact you soon.
                     </p>
                   </div>
@@ -242,24 +242,24 @@ const ContactUs = () => {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-medium text-[#111827] mb-1.5">
-                        Full Name <span className="text-[#DC2626]">*</span>
+                      <label className="block text-sm font-medium text-[#111111] mb-1.5">
+                        Full Name <span className="text-[#D19701]">*</span>
                       </label>
                       <div className="relative">
-                        <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
+                        <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999999]" />
                         <input
                           type="text"
                           name="full_name"
                           value={formData.full_name}
                           onChange={handleChange}
-                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-[#F8FAFC] border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#182E72]/20 ${
-                            errors.full_name ? 'border-[#DC2626]' : 'border-[#E5E7EB] focus:border-[#182E72]'
-                          }`}
+                          className={`w-full pl-10 pr-4 py-3 rounded-[14px] bg-[#FDFBD4] border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D19701]/20 ${
+                            errors.full_name ? 'border-[#D19701]' : 'border-[#EFE7C8] focus:border-[#D19701]'
+                          } text-[#111111] placeholder:text-[#999999]`}
                           placeholder="John Doe"
                         />
                       </div>
                       {errors.full_name && (
-                        <p className="mt-1 text-sm flex items-center gap-1 text-[#DC2626]">
+                        <p className="mt-1 text-sm flex items-center gap-1 text-[#B67E00]">
                           <AlertCircle size={14} />
                           {errors.full_name}
                         </p>
@@ -267,24 +267,24 @@ const ContactUs = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-[#111827] mb-1.5">
-                        Email Address <span className="text-[#DC2626]">*</span>
+                      <label className="block text-sm font-medium text-[#111111] mb-1.5">
+                        Email Address <span className="text-[#D19701]">*</span>
                       </label>
                       <div className="relative">
-                        <AtSign size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
+                        <AtSign size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999999]" />
                         <input
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-[#F8FAFC] border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#182E72]/20 ${
-                            errors.email ? 'border-[#DC2626]' : 'border-[#E5E7EB] focus:border-[#182E72]'
-                          }`}
+                          className={`w-full pl-10 pr-4 py-3 rounded-[14px] bg-[#FDFBD4] border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D19701]/20 ${
+                            errors.email ? 'border-[#D19701]' : 'border-[#EFE7C8] focus:border-[#D19701]'
+                          } text-[#111111] placeholder:text-[#999999]`}
                           placeholder="john@example.com"
                         />
                       </div>
                       {errors.email && (
-                        <p className="mt-1 text-sm flex items-center gap-1 text-[#DC2626]">
+                        <p className="mt-1 text-sm flex items-center gap-1 text-[#B67E00]">
                           <AlertCircle size={14} />
                           {errors.email}
                         </p>
@@ -294,38 +294,38 @@ const ContactUs = () => {
 
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-medium text-[#111827] mb-1.5">
+                      <label className="block text-sm font-medium text-[#111111] mb-1.5">
                         Phone Number
                       </label>
                       <div className="relative">
-                        <PhoneCall size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
+                        <PhoneCall size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999999]" />
                         <input
                           type="tel"
                           name="phone_number"
                           value={formData.phone_number}
                           onChange={handleChange}
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#F8FAFC] border border-[#E5E7EB] focus:outline-none focus:ring-2 focus:ring-[#182E72]/20 focus:border-[#182E72] transition-all duration-200"
-                          placeholder="+1 (555) 123-4567"
+                          className="w-full pl-10 pr-4 py-3 rounded-[14px] bg-[#FDFBD4] border border-[#EFE7C8] focus:outline-none focus:ring-2 focus:ring-[#D19701]/20 focus:border-[#D19701] transition-all duration-200 text-[#111111] placeholder:text-[#999999]"
+                          placeholder="+91 98765 43210"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-[#111827] mb-1.5">
-                        Subject <span className="text-[#DC2626]">*</span>
+                      <label className="block text-sm font-medium text-[#111111] mb-1.5">
+                        Subject <span className="text-[#D19701]">*</span>
                       </label>
                       <input
                         type="text"
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#182E72]/20 ${
-                          errors.subject ? 'border-[#DC2626]' : 'border-[#E5E7EB] focus:border-[#182E72]'
-                        }`}
+                        className={`w-full px-4 py-3 rounded-[14px] bg-[#FDFBD4] border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D19701]/20 ${
+                          errors.subject ? 'border-[#D19701]' : 'border-[#EFE7C8] focus:border-[#D19701]'
+                        } text-[#111111] placeholder:text-[#999999]`}
                         placeholder="How can we help?"
                       />
                       {errors.subject && (
-                        <p className="mt-1 text-sm flex items-center gap-1 text-[#DC2626]">
+                        <p className="mt-1 text-sm flex items-center gap-1 text-[#B67E00]">
                           <AlertCircle size={14} />
                           {errors.subject}
                         </p>
@@ -334,21 +334,21 @@ const ContactUs = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#111827] mb-1.5">
-                      Message <span className="text-[#DC2626]">*</span>
+                    <label className="block text-sm font-medium text-[#111111] mb-1.5">
+                      Message <span className="text-[#D19701]">*</span>
                     </label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows="5"
-                      className={`w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#182E72]/20 resize-none ${
-                        errors.message ? 'border-[#DC2626]' : 'border-[#E5E7EB] focus:border-[#182E72]'
-                      }`}
+                      className={`w-full px-4 py-3 rounded-[14px] bg-[#FDFBD4] border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D19701]/20 resize-none ${
+                        errors.message ? 'border-[#D19701]' : 'border-[#EFE7C8] focus:border-[#D19701]'
+                      } text-[#111111] placeholder:text-[#999999]`}
                       placeholder="Tell us about your needs..."
                     />
                     {errors.message && (
-                      <p className="mt-1 text-sm flex items-center gap-1 text-[#DC2626]">
+                      <p className="mt-1 text-sm flex items-center gap-1 text-[#B67E00]">
                         <AlertCircle size={14} />
                         {errors.message}
                       </p>
@@ -358,11 +358,16 @@ const ContactUs = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#182E72] text-white font-medium rounded-xl transition-all duration-300 hover:bg-[#2848A0] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="group w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 font-heading font-semibold text-[#5A3A00] rounded-[14px] transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+                    style={{
+                      background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                      border: '1px solid #C38A00',
+                      boxShadow: '0 10px 25px rgba(209,151,1,0.35)',
+                    }}
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
+                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-[#5A3A00] border-t-transparent" />
                         Sending...
                       </>
                     ) : (
@@ -376,46 +381,50 @@ const ContactUs = () => {
               </div>
             </div>
 
-            {/* Map & Social - 2 columns */}
+            {/* Map & Social - 2 columns - Gold Theme */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Map Card */}
-              <div className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden">
-                <div className="h-48 md:h-56 bg-[#E9EEFF] relative flex items-center justify-center">
+              {/* Map Card - Gold Theme */}
+              <div className="bg-white rounded-2xl border border-[#EFE7C8] overflow-hidden shadow-sm">
+                <div className="h-48 md:h-56 relative flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #FDFBD4 0%, #FFF19C 100%)' }}>
                   <div className="text-center">
-                    <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-[#182E72]/10 flex items-center justify-center">
-                      <MapPin size={28} className="text-[#182E72]" />
+                    <div className="w-14 h-14 mx-auto mb-3 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(90deg, #B67E00, #D19701, #FFF19C)' }}>
+                      <MapPin size={28} className="text-[#5A3A00]" />
                     </div>
-                    <h3 className="text-lg font-semibold text-[#111827]">Our Location</h3>
-                    <p className="text-sm text-[#6B7280]">123 Fitness Street, Miami, FL 33101</p>
+                    <h3 className="font-heading text-lg font-semibold text-[#111111]">Our Location</h3>
+                    <p className="text-sm text-[#666666] max-w-xs mx-auto">Habra NRC Road, Dhanar Chatal, Jadssore Road, North 24 Parganas</p>
                   </div>
                   {/* Decorative map lines */}
                   <div className="absolute inset-0 opacity-5">
-                    <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full border-2 border-[#182E72]" />
-                    <div className="absolute bottom-1/4 right-1/4 w-24 h-24 rounded-full border-2 border-[#182E72]" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full border-2 border-[#182E72]" />
+                    <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full border-2 border-[#D19701]" />
+                    <div className="absolute bottom-1/4 right-1/4 w-24 h-24 rounded-full border-2 border-[#D19701]" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full border-2 border-[#D19701]" />
                   </div>
                 </div>
                 <div className="p-6">
-                  <h4 className="font-semibold text-[#111827] mb-2">Visit Our Showroom</h4>
-                  <p className="text-sm text-[#6B7280] mb-4">
-                    Experience our premium products firsthand. Our experts are available
+                  <h4 className="font-heading font-semibold text-[#111111] mb-2">Visit Our Showroom</h4>
+                  <p className="text-sm text-[#666666] mb-4">
+                    Experience our premium fashion collection firsthand. Our experts are available
                     to guide you through our complete range.
                   </p>
                   <div className="flex gap-3">
-                    <button className="btn-secondary text-sm px-4 py-2">
+                    <button className="px-4 py-2 rounded-[14px] font-medium transition-all duration-300 hover:shadow-lg" style={{
+                      background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                      color: '#5A3A00',
+                      border: '1px solid #C38A00',
+                    }}>
                       Get Directions
                     </button>
-                    <button className="btn-primary text-sm px-4 py-2">
+                    <button className="px-4 py-2 rounded-[14px] font-medium border border-[#D19701] text-[#D19701] hover:bg-[#FDFBD4] transition-all duration-300">
                       Schedule Visit
                     </button>
                   </div>
                 </div>
               </div>
 
-              {/* Social Media Card */}
-              <div className="bg-white rounded-2xl border border-[#E5E7EB] p-6">
-                <h4 className="font-semibold text-[#111827] mb-2">Connect With Us</h4>
-                <p className="text-sm text-[#6B7280] mb-4">
+              {/* Social Media Card - Gold Theme */}
+              <div className="bg-white rounded-2xl border border-[#EFE7C8] p-6 shadow-sm">
+                <h4 className="font-heading font-semibold text-[#111111] mb-2">Connect With Us</h4>
+                <p className="text-sm text-[#666666] mb-4">
                   Follow us for the latest updates, offers, and inspiration.
                 </p>
                 <div className="flex gap-3">
@@ -425,10 +434,11 @@ const ContactUs = () => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group w-11 h-11 rounded-xl flex items-center justify-center bg-[#F8FAFC] border border-[#E5E7EB] transition-all duration-300 hover:bg-[#182E72] hover:border-[#182E72] hover:shadow-md hover:-translate-y-1"
+                      className="group w-11 h-11 rounded-[14px] flex items-center justify-center border border-[#EFE7C8] transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                      style={{ background: 'linear-gradient(90deg, #FDFBD4, #FFFFFF)' }}
                       aria-label={social.label}
                     >
-                      <social.icon size={18} className="text-[#6B7280] group-hover:text-white transition-colors" />
+                      <social.icon size={18} className="text-[#666666] group-hover:text-[#D19701] transition-colors" />
                     </a>
                   ))}
                 </div>
@@ -438,19 +448,19 @@ const ContactUs = () => {
         </div>
       </section>
 
-      {/* ===== FAQ SECTION ===== */}
-      <section className="py-16 px-4 md:px-8 bg-white border-t border-[#E5E7EB]">
+      {/* ===== FAQ SECTION - Gold Theme ===== */}
+      <section className="py-16 px-4 md:px-8 bg-[#FDFBD4] border-t border-[#EFE7C8]">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <div className="inline-block mb-4 px-4 py-2 rounded-full bg-[#E9EEFF] border border-[#182E72]/20">
-              <span className="text-sm font-semibold uppercase tracking-wider text-[#182E72]">
+            <div className="inline-block mb-4 px-4 py-2 rounded-full border border-[#D19701]/30" style={{ background: 'linear-gradient(90deg, #B67E00, #D19701, #FFF19C)' }}>
+              <span className="text-sm font-heading font-semibold uppercase tracking-wider text-[#5A3A00]">
                 FAQ
               </span>
             </div>
-            <h2 className="font-heading text-3xl md:text-4xl text-[#111827] mb-3">
+            <h2 className="font-heading text-3xl md:text-4xl text-[#111111] mb-3">
               Frequently Asked Questions
             </h2>
-            <p className="text-[#6B7280] max-w-lg mx-auto">
+            <p className="text-[#666666] max-w-lg mx-auto">
               Find answers to the most common questions about our products and services.
             </p>
           </div>
@@ -459,28 +469,28 @@ const ContactUs = () => {
             {faqs.map((faq) => (
               <div
                 key={faq.id}
-                className={`rounded-xl border transition-all duration-300 ${
+                className={`rounded-[14px] border transition-all duration-300 bg-white ${
                   openFaq === faq.id
-                    ? 'border-[#182E72] shadow-[0_4px_20px_rgba(24,46,114,0.1)]'
-                    : 'border-[#E5E7EB] hover:border-[#182E72]/30'
+                    ? 'border-[#D19701] shadow-[0_4px_20px_rgba(209,151,1,0.15)]'
+                    : 'border-[#EFE7C8] hover:border-[#D19701]/50'
                 }`}
               >
                 <button
                   onClick={() => toggleFaq(faq.id)}
                   className="w-full px-5 py-4 flex items-center justify-between text-left group"
                 >
-                  <span className={`font-medium transition-colors duration-300 ${
-                    openFaq === faq.id ? 'text-[#182E72]' : 'text-[#111827]'
+                  <span className={`font-heading font-medium transition-colors duration-300 ${
+                    openFaq === faq.id ? 'text-[#D19701]' : 'text-[#111111]'
                   }`}>
                     {faq.question}
                   </span>
                   <div className={`p-1 rounded-lg transition-all duration-300 flex-shrink-0 ${
-                    openFaq === faq.id ? 'bg-[#E9EEFF]' : 'bg-[#F8FAFC] group-hover:bg-[#E9EEFF]'
+                    openFaq === faq.id ? 'bg-[#FDFBD4]' : 'bg-[#FDFBD4] group-hover:bg-[#FFF19C]'
                   }`}>
                     {openFaq === faq.id ? (
-                      <ChevronUp size={18} className="text-[#182E72]" />
+                      <ChevronUp size={18} className="text-[#D19701]" />
                     ) : (
-                      <ChevronDown size={18} className="text-[#6B7280] group-hover:text-[#182E72]" />
+                      <ChevronDown size={18} className="text-[#666666] group-hover:text-[#D19701]" />
                     )}
                   </div>
                 </button>
@@ -490,7 +500,7 @@ const ContactUs = () => {
                     openFaq === faq.id ? 'max-h-96 pb-5' : 'max-h-0'
                   }`}
                 >
-                  <p className="text-[#6B7280] leading-relaxed border-t border-[#F1F5F9] pt-4">
+                  <p className="text-[#666666] leading-relaxed border-t border-[#EFE7C8] pt-4">
                     {faq.answer}
                   </p>
                 </div>
@@ -505,59 +515,20 @@ const ContactUs = () => {
           font-family: 'Poppins', sans-serif;
           font-weight: 600;
         }
-        .btn-primary {
-          background: #182E72;
-          color: #FFFFFF;
-          font-weight: 500;
-          border: none;
-          border-radius: 10px;
-          padding: 10px 20px;
-          transition: all 0.3s ease;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-        }
-        .btn-primary:hover {
-          background: #2848A0;
-          box-shadow: 0 8px 24px rgba(24,46,114,0.25);
-          transform: translateY(-2px);
-        }
-        .btn-secondary {
-          background: transparent;
-          color: #182E72;
-          border: 1.5px solid #182E72;
-          border-radius: 10px;
-          padding: 10px 20px;
-          font-weight: 500;
-          transition: all 0.3s ease;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-        }
-        .btn-secondary:hover {
-          background: #182E72;
-          color: #FFFFFF;
-          border-color: #182E72;
-          box-shadow: 0 8px 20px rgba(24,46,114,0.18);
-          transform: translateY(-2px);
-        }
-        .text-primary-light {
-          color: #E9EEFF;
-        }
+        
         .animate-pulse {
           animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+        
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }
         }
+        
         .animate-bounce {
           animation: bounce 1s infinite;
         }
+        
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(4px); }
