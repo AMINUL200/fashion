@@ -57,6 +57,9 @@ import AccountsOrderDetails from "./pages/account/AccountsOrderDetails";
 import DeliveryPartnerMaster from "./pages/admin/delivery_partner/DeliveryPartnerMaster";
 import ProductPage2 from "./pages/product/ProductPage2";
 import ProductDetailsPage from "./pages/product/ProductDetailsPage";
+import ManageAddress from "./pages/profile/ManageAddress";
+import MyWishListPage from "./pages/profile/MyWishListPage";
+import AccountSettings from "./pages/profile/AccountSettings";
 
 // Protected Route Component for authenticated users only
 const ProtectedRoute = ({ children }) => {
@@ -247,27 +250,56 @@ const App = () => {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute>
+              // <ProtectedRoute>
                 <ProfilePage />
-              </ProtectedRoute>
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/addresses"
+            element={
+              // <ProtectedRoute>
+                <ManageAddress />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/wishlist"
+            element={
+              // <ProtectedRoute>
+                <MyWishListPage />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/settings"
+            element={
+              // <ProtectedRoute>
+                <AccountSettings />
+              // </ProtectedRoute>
             }
           />
           <Route
             path="/orders"
             element={
-              <ProtectedRoute>
+              // <ProtectedRoute>
                 <MyOrders />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
           <Route
             path="/order/:id"
             element={
-              <ProtectedRoute>
+              // <ProtectedRoute>
                 <OrderDetails />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
+
+
+
+
+
         </Route>
 
         {/* Admin Routes - Accessible by admin, sales, accounts */}

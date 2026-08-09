@@ -1,301 +1,463 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   User,
+  Settings,
+  MapPin,
+  Package,
+  Heart,
+  LogOut,
+  ChevronRight,
+  Edit,
+  Camera,
   Mail,
   Phone,
-  Edit,
-  Save,
-  LogOut,
-  Settings,
-} from "lucide-react";
-import PageLoader from "../../component/common/PageLoader";
-import PageHelmet from "../../component/common/PageHelmet";
-import { useAuth } from "../../context/AuthContext";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../utils/app";
+  Calendar,
+  Shield,
+  CreditCard,
+  Bell,
+  HelpCircle,
+  ArrowLeft,
+  CheckCircle,
+  Star,
+  Truck,
+  Clock
+} from 'lucide-react';
 
 const ProfilePage = () => {
-  const [loading, setLoading] = useState(true);
-  const [profileData, setProfileData] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
-  const [updateLoading, setUpdateLoading] = useState(false);
-  
-  const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [activeSection, setActiveSection] = useState('profile');
 
-  // Fetch profile data
-  useEffect(() => {
-    const fetchProfile = async () => {
-      setLoading(true);
-      try {
-        const response = await api.get("/user/profile");
-        
-        if (response.data?.status) {
-          const data = response.data.data;
-          setProfileData(data);
-          setFormData({
-            name: data.name || "",
-            email: data.email || "",
-            phone: data.phone || "",
-          });
-        } else {
-          toast.error("Failed to load profile");
-        }
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-        toast.error("Failed to load profile data");
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Sample user data
+  const userData = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '+91 7699367737',
+    joinedDate: 'January 2024',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+  };
 
-    fetchProfile();
-  }, [navigate]);
+  // Sample address data
+  const addresses = [
+    {
+      id: 1,
+      type: 'Home',
+      address: 'Habra NRC Road, Dhanar Chatal, Jadssore Road',
+      city: 'North 24 Parganas',
+      state: 'West Bengal',
+      pincode: '743263',
+      phone: '+91 7699367737',
+      isDefault: true
+    },
+    {
+      id: 2,
+      type: 'Work',
+      address: 'Kolkata City Centre, Sector V',
+      city: 'Kolkata',
+      state: 'West Bengal',
+      pincode: '700091',
+      phone: '+91 7980971636',
+      isDefault: false
+    }
+  ];
 
-  const handleSave = async () => {
-    setUpdateLoading(true);
-    try {
-      const response = await api.post("/user/profile/update", formData);
-      
-      if (response.data?.status) {
-        toast.success("Profile updated successfully");
-        setProfileData({ ...profileData, ...formData });
-        setIsEditing(false);
-      } else {
-        toast.error(response.data?.message || "Failed to update profile");
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      
-      if (error.response?.status === 422) {
-        const errors = error.response.data?.errors;
-        if (errors) {
-          Object.values(errors).forEach(msg => {
-            toast.error(msg[0]);
-          });
-        } else {
-          toast.error("Please check your form data");
-        }
-      } else {
-        toast.error(error.response?.data?.message || "Failed to update profile");
-      }
-    } finally {
-      setUpdateLoading(false);
+  // Sample wishlist data
+  const wishlistItems = [
+    {
+      id: 1,
+      name: 'Classic White T-Shirt',
+      brand: 'Nike',
+      price: 29.99,
+      rating: 4.5,
+      reviews: 128,
+      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&h=250&fit=crop',
+      inStock: true
+    },
+    {
+      id: 2,
+      name: 'Premium Black Tee',
+      brand: 'Adidas',
+      price: 34.99,
+      rating: 4.8,
+      reviews: 89,
+      image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=200&h=250&fit=crop',
+      inStock: true
+    },
+    {
+      id: 3,
+      name: 'Vintage Graphic T-Shirt',
+      brand: 'Puma',
+      price: 39.99,
+      rating: 4.3,
+      reviews: 156,
+      image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=200&h=250&fit=crop',
+      inStock: false
+    }
+  ];
+
+  // Navigation links
+  const navLinks = [
+    { id: 'profile', label: 'Profile Information', icon: User, path: '/profile' },
+    { id: 'address', label: 'Manage Addresses', icon: MapPin, path: '/profile/addresses' },
+    { id: 'orders', label: 'My Orders', icon: Package, path: '/orders' },
+    { id: 'wishlist', label: 'My Wishlist', icon: Heart, path: '/profile/wishlist' },
+    { id: 'settings', label: 'Account Settings', icon: Settings, path: '/profile/settings' },
+  ];
+
+  const handleNavClick = (sectionId, path) => {
+    setActiveSection(sectionId);
+    navigate(path);
+  };
+
+  // Render content based on active section
+  const renderContent = () => {
+    switch(activeSection) {
+      case 'profile':
+        return (
+          <div className="space-y-6">
+            {/* Profile Info */}
+            <div className="flex items-start gap-6 p-6 bg-[#FDFBD4] rounded-2xl border border-[#EFE7C8]">
+              <div className="relative">
+                <img
+                  src={userData.avatar}
+                  alt={userData.name}
+                  className="w-20 h-20 rounded-full object-cover border-2 border-[#D19701]"
+                />
+                <button className="absolute -bottom-1 -right-1 p-1.5 rounded-full bg-[#D19701] text-white hover:bg-[#B67E00] transition-colors">
+                  <Camera size={14} />
+                </button>
+              </div>
+              <div className="flex-1">
+                <h2 className="font-heading text-xl text-[#111111]">{userData.name}</h2>
+                <p className="text-sm text-[#666666] flex items-center gap-2 mt-1">
+                  <Mail size={14} />
+                  {userData.email}
+                </p>
+                <p className="text-sm text-[#666666] flex items-center gap-2">
+                  <Phone size={14} />
+                  {userData.phone}
+                </p>
+                <p className="text-xs text-[#999999] flex items-center gap-2 mt-1">
+                  <Calendar size={12} />
+                  Joined {userData.joinedDate}
+                </p>
+              </div>
+              <button className="flex items-center gap-2 px-4 py-2 rounded-[14px] text-sm font-medium border border-[#D19701] text-[#D19701] hover:bg-[#FDFBD4] transition-all duration-300">
+                <Edit size={14} />
+                Edit Profile
+              </button>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-4 bg-white rounded-2xl border border-[#EFE7C8] text-center hover:shadow-md transition-shadow">
+                <Package size={24} className="text-[#D19701] mx-auto mb-2" />
+                <p className="text-2xl font-heading font-bold text-[#111111]">12</p>
+                <p className="text-sm text-[#666666]">Total Orders</p>
+              </div>
+              <div className="p-4 bg-white rounded-2xl border border-[#EFE7C8] text-center hover:shadow-md transition-shadow">
+                <Heart size={24} className="text-[#D19701] mx-auto mb-2" />
+                <p className="text-2xl font-heading font-bold text-[#111111]">{wishlistItems.length}</p>
+                <p className="text-sm text-[#666666]">Wishlist Items</p>
+              </div>
+              <div className="p-4 bg-white rounded-2xl border border-[#EFE7C8] text-center hover:shadow-md transition-shadow">
+                <Star size={24} className="text-[#D19701] mx-auto mb-2" />
+                <p className="text-2xl font-heading font-bold text-[#111111]">4.8</p>
+                <p className="text-sm text-[#666666]">Average Rating</p>
+              </div>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-white rounded-2xl border border-[#EFE7C8] p-6">
+              <h3 className="font-heading text-lg text-[#111111] mb-4 flex items-center gap-2">
+                <Clock size={18} className="text-[#D19701]" />
+                Recent Activity
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-[#FDFBD4] rounded-xl border border-[#EFE7C8]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#D19701]/10 flex items-center justify-center">
+                      <Package size={16} className="text-[#D19701]" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-[#111111]">Order #ORD-2024-001</p>
+                      <p className="text-xs text-[#666666]">Delivered on Jan 17, 2024</p>
+                    </div>
+                  </div>
+                  <span className="text-xs text-[#16A34A] flex items-center gap-1">
+                    <CheckCircle size={12} />
+                    Completed
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-[#FDFBD4] rounded-xl border border-[#EFE7C8]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#D19701]/10 flex items-center justify-center">
+                      <Heart size={16} className="text-[#D19701]" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-[#111111]">Added to Wishlist</p>
+                      <p className="text-xs text-[#666666]">Classic White T-Shirt</p>
+                    </div>
+                  </div>
+                  <span className="text-xs text-[#D19701]">Today</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'address':
+        return (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="font-heading text-xl text-[#111111]">Manage Addresses</h2>
+              <button className="flex items-center gap-2 px-4 py-2 rounded-[14px] text-sm font-medium transition-all duration-300 hover:shadow-lg"
+                style={{
+                  background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                  color: '#5A3A00',
+                  border: '1px solid #C38A00',
+                }}
+              >
+                <MapPin size={14} />
+                Add New Address
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {addresses.map((address) => (
+                <div key={address.id} className="bg-white rounded-2xl border border-[#EFE7C8] p-6 hover:shadow-md transition-shadow">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h4 className="font-heading font-semibold text-[#111111]">{address.type}</h4>
+                      {address.isDefault && (
+                        <span className="text-xs text-[#D19701] bg-[#FDFBD4] px-2 py-0.5 rounded-full">Default</span>
+                      )}
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="p-1.5 rounded-lg hover:bg-[#FDFBD4] transition-colors">
+                        <Edit size={14} className="text-[#666666] hover:text-[#D19701]" />
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-sm text-[#666666]">{address.address}</p>
+                  <p className="text-sm text-[#666666]">{address.city}, {address.state}</p>
+                  <p className="text-sm text-[#666666]">Pin: {address.pincode}</p>
+                  <p className="text-sm text-[#666666]">Phone: {address.phone}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'orders':
+        return (
+          <div className="space-y-6">
+            <h2 className="font-heading text-xl text-[#111111]">My Orders</h2>
+            <div className="bg-white rounded-2xl border border-[#EFE7C8] p-6 text-center">
+              <Package size={48} className="text-[#D19701] mx-auto mb-4" />
+              <p className="text-[#666666]">View all your orders</p>
+              <button
+                onClick={() => navigate('/orders')}
+                className="mt-4 px-6 py-2 rounded-[14px] font-medium text-[#5A3A00] transition-all duration-300 hover:shadow-lg"
+                style={{
+                  background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                  border: '1px solid #C38A00',
+                }}
+              >
+                Go to Orders
+              </button>
+            </div>
+          </div>
+        );
+
+      case 'wishlist':
+        return (
+          <div className="space-y-6">
+            <h2 className="font-heading text-xl text-[#111111]">My Wishlist</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {wishlistItems.map((item) => (
+                <div key={item.id} className="bg-white rounded-2xl border border-[#EFE7C8] overflow-hidden hover:shadow-md transition-shadow">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[#FDFBD4]">
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    {!item.inStock && (
+                      <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                        <span className="text-white text-xs font-bold uppercase tracking-wider">Out of Stock</span>
+                      </div>
+                    )}
+                    <button className="absolute top-2 right-2 p-1.5 rounded-full bg-white/90 hover:bg-[#D19701] hover:text-white transition-colors">
+                      <Heart size={16} className="fill-[#D19701] text-[#D19701]" />
+                    </button>
+                  </div>
+                  <div className="p-4">
+                    <p className="text-xs text-[#666666] uppercase tracking-wider">{item.brand}</p>
+                    <h4 className="font-medium text-[#111111] text-sm mt-1 line-clamp-2">{item.name}</h4>
+                    <div className="flex items-center gap-1 mt-1.5">
+                      <Star size={12} className="text-[#D19701] fill-[#D19701]" />
+                      <span className="text-xs text-[#666666]">{item.rating}</span>
+                      <span className="text-xs text-[#999999]">({item.reviews})</span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="font-heading font-bold text-[#D19701]">${item.price}</span>
+                    </div>
+                    <button className="w-full mt-3 py-2 rounded-[14px] text-sm font-medium transition-all duration-300 hover:shadow-lg"
+                      style={{
+                        background: 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)',
+                        color: '#5A3A00',
+                        border: '1px solid #C38A00',
+                      }}
+                    >
+                      Move to Cart
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'settings':
+        return (
+          <div className="space-y-6">
+            <h2 className="font-heading text-xl text-[#111111]">Account Settings</h2>
+            <div className="bg-white rounded-2xl border border-[#EFE7C8] divide-y divide-[#EFE7C8]">
+              <div className="p-4 flex items-center justify-between hover:bg-[#FDFBD4]/30 transition-colors cursor-pointer">
+                <div className="flex items-center gap-3">
+                  <Shield size={18} className="text-[#D19701]" />
+                  <span className="text-[#111111]">Change Password</span>
+                </div>
+                <ChevronRight size={16} className="text-[#999999]" />
+              </div>
+              <div className="p-4 flex items-center justify-between hover:bg-[#FDFBD4]/30 transition-colors cursor-pointer">
+                <div className="flex items-center gap-3">
+                  <Bell size={18} className="text-[#D19701]" />
+                  <span className="text-[#111111]">Notification Preferences</span>
+                </div>
+                <ChevronRight size={16} className="text-[#999999]" />
+              </div>
+              <div className="p-4 flex items-center justify-between hover:bg-[#FDFBD4]/30 transition-colors cursor-pointer">
+                <div className="flex items-center gap-3">
+                  <CreditCard size={18} className="text-[#D19701]" />
+                  <span className="text-[#111111]">Payment Methods</span>
+                </div>
+                <ChevronRight size={16} className="text-[#999999]" />
+              </div>
+              <div className="p-4 flex items-center justify-between hover:bg-[#FDFBD4]/30 transition-colors cursor-pointer">
+                <div className="flex items-center gap-3">
+                  <HelpCircle size={18} className="text-[#D19701]" />
+                  <span className="text-[#111111]">Help & Support</span>
+                </div>
+                <ChevronRight size={16} className="text-[#999999]" />
+              </div>
+              <div className="p-4 flex items-center justify-between hover:bg-[#FDFBD4]/30 transition-colors cursor-pointer text-[#DC2626]">
+                <div className="flex items-center gap-3">
+                  <LogOut size={18} />
+                  <span>Logout</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
     }
   };
 
-  const handleCancel = () => {
-    setFormData({
-      name: profileData?.name || "",
-      email: profileData?.email || "",
-      phone: profileData?.phone || "",
-    });
-    setIsEditing(false);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
-  if (loading) return <PageLoader />;
-
   return (
-    <>
-      <PageHelmet title="My Profile - ONE REP MORE" />
-      <div className="min-h-screen py-8 px-4 md:px-8 pt-30 md:pt-40 bg-main">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-primary">
-              My Profile
-            </h1>
-            <p className="text-lg text-muted">
-              Manage your account information
-            </p>
+    <div className="min-h-screen bg-[#FFFFFF] pt-8 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Page Header */}
+        <div className="flex items-center gap-4 mb-8">
+          <button
+            onClick={() => navigate(-1)}
+            className="p-2 rounded-[14px] border border-[#EFE7C8] hover:border-[#D19701] hover:bg-[#FDFBD4] transition-all duration-300"
+          >
+            <ArrowLeft size={20} className="text-[#666666] hover:text-[#D19701]" />
+          </button>
+          <div>
+            <h1 className="font-heading text-2xl md:text-3xl text-[#111111]">My Account</h1>
+            <p className="text-sm text-[#666666]">Manage your profile, orders and preferences</p>
+          </div>
+        </div>
+
+        {/* Main Content - Sidebar + Content */}
+        <div className="grid lg:grid-cols-4 gap-6">
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-2xl border border-[#EFE7C8] p-4 shadow-sm sticky top-24">
+              {/* User Summary */}
+              <div className="flex items-center gap-3 pb-4 mb-4 border-b border-[#EFE7C8]">
+                <img
+                  src={userData.avatar}
+                  alt={userData.name}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-[#D19701]"
+                />
+                <div>
+                  <p className="font-heading font-semibold text-[#111111] text-sm">{userData.name}</p>
+                  <p className="text-xs text-[#666666]">{userData.email}</p>
+                </div>
+              </div>
+
+              {/* Navigation Links */}
+              <nav className="space-y-1">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.id;
+                  const Icon = link.icon;
+                  return (
+                    <button
+                      key={link.id}
+                      onClick={() => handleNavClick(link.id, link.path)}
+                      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-[14px] text-sm transition-all duration-300 ${
+                        isActive
+                          ? 'text-[#5A3A00] font-medium'
+                          : 'text-[#666666] hover:text-[#D19701] hover:bg-[#FDFBD4]'
+                      }`}
+                      style={{
+                        background: isActive 
+                          ? 'linear-gradient(90deg, #B67E00 0%, #D19701 20%, #FFF19C 50%, #D19701 80%, #B67E00 100%)'
+                          : 'transparent',
+                        boxShadow: isActive ? '0 4px 15px rgba(209,151,1,0.15)' : 'none'
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon size={18} className={isActive ? 'text-[#5A3A00]' : ''} />
+                        <span>{link.label}</span>
+                      </div>
+                      <ChevronRight size={16} className={isActive ? 'text-[#5A3A00]' : 'text-[#999999]'} />
+                    </button>
+                  );
+                })}
+              </nav>
+
+              {/* Logout Button */}
+              <button className="w-full mt-4 pt-4 border-t border-[#EFE7C8] flex items-center justify-center gap-2 px-3 py-2.5 rounded-[14px] text-sm text-[#DC2626] hover:bg-[#DC2626]/10 transition-all duration-300">
+                <LogOut size={18} />
+                Logout
+              </button>
+            </div>
           </div>
 
-          {/* Profile Card */}
-          <div className="rounded-2xl overflow-hidden bg-card border border-theme">
-            {/* Profile Header */}
-            <div className="h-32 relative bg-gradient-primary">
-              <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
-                <div className="relative">
-                  <div
-                    className="w-24 h-24 rounded-full border-4 flex items-center justify-center bg-main z-10!"
-                    // style={{ 
-                    //   borderColor: 'var(--bg-card)',
-                    // }}
-                  >
-                    <span className="text-3xl font-bold text-primary">
-                      {profileData?.name?.charAt(0) || "U"}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Profile Info */}
-            <div className="pt-16 pb-8 px-8">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold mb-1 text-primary">
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full text-center bg-transparent border-b pb-1 focus:outline-none"
-                      style={{
-                        color: 'var(--text-primary)',
-                        borderColor: 'var(--color-primary)',
-                      }}
-                      placeholder="Your name"
-                    />
-                  ) : (
-                    profileData?.name
-                  )}
-                </h2>
-                <p className="text-sm text-muted">
-                  {profileData?.role === "admin" ? "Administrator" : "Member"}
-                </p>
-              </div>
-
-              {/* Personal Information */}
-              <div className="max-w-2xl mx-auto space-y-6 mb-8">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Mail size={16} className="text-muted" />
-                    <label className="text-sm font-medium text-muted">
-                      Email Address
-                    </label>
-                  </div>
-                  {isEditing ? (
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      readOnly
-                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 transition-all bg-main border-theme text-primary"
-                      style={{
-                        border: '1px solid var(--bg-border)',
-                      }}
-                      placeholder="Your email"
-                    />
-                  ) : (
-                    <p className="text-lg font-medium px-4 text-primary">
-                      {profileData?.email}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Phone size={16} className="text-muted" />
-                    <label className="text-sm font-medium text-muted">
-                      Phone Number
-                    </label>
-                  </div>
-                  {isEditing ? (
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 transition-all bg-main border-theme text-primary"
-                      style={{
-                        border: '1px solid var(--bg-border)',
-                      }}
-                      placeholder="Your phone number"
-                    />
-                  ) : (
-                    <p className="text-lg font-medium px-4 text-primary">
-                      {profileData?.phone || "Not provided"}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
-                {isEditing ? (
-                  <>
-                    <button
-                      onClick={handleSave}
-                      disabled={updateLoading}
-                      className="flex-1 py-3 rounded-lg font-semibold text-primary transition-all hover:shadow-primary-hover disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary"
-                    >
-                      <div className="flex items-center justify-center gap-2">
-                        {updateLoading ? (
-                          <>
-                            <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                            Updating...
-                          </>
-                        ) : (
-                          <>
-                            <Save size={16} />
-                            Save Changes
-                          </>
-                        )}
-                      </div>
-                    </button>
-                    <button
-                      onClick={handleCancel}
-                      disabled={updateLoading}
-                      className="flex-1 py-3 rounded-lg font-semibold transition-all hover:bg-white/5 disabled:opacity-50 text-primary border border-theme"
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      onClick={() => setIsEditing(true)}
-                      className="flex-1 py-3 rounded-lg font-semibold transition-all hover:bg-white/5 flex items-center justify-center gap-2 text-primary border border-theme"
-                    >
-                      <Edit size={16} />
-                      Edit Profile
-                    </button>
-                    <button
-                      onClick={handleLogout}
-                      className="flex-1 py-3 rounded-lg font-semibold transition-all hover:bg-red-600/10 flex items-center justify-center gap-2 text-brand border border-theme"
-                    >
-                      <LogOut size={16} />
-                      Sign Out
-                    </button>
-                  </>
-                )}
-              </div>
-
-              {/* Member Info */}
-              <div className="mt-8 pt-6 border-t text-center border-theme">
-                <p className="text-sm text-muted">
-                  Member ID: #{profileData?.id}
-                </p>
-                <p className="text-sm text-muted">
-                  Account type: {profileData?.role === "admin" ? "Administrator" : "Standard Member"}
-                </p>
-              </div>
-            </div>
+          {/* Content Area */}
+          <div className="lg:col-span-3">
+            {renderContent()}
           </div>
         </div>
       </div>
-    </>
+
+      <style jsx>{`
+        .font-heading {
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+        }
+
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      `}</style>
+    </div>
   );
 };
 
